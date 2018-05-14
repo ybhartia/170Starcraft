@@ -1,7 +1,9 @@
 import numpy as np
+import svmImplementation as svmImplem
 def generateInput(filepath):
 # filepath = 'replayCollection.txt'
     x = [[]]
+    y = []
     with open(filepath) as fp:
        line = fp.readline()
        cnt = 1
@@ -23,10 +25,15 @@ def generateInput(filepath):
            #     x = np.array(vals)
            # else:
            x += [vals]
+           y += [cnt%2]
+
+
            # READ THE NEXT LINE
            line = fp.readline()
            cnt += 1
 
-    return x[1:]
+    return x[1:], y
 
-input = generateInput('replayCollection.txt')
+trainingX, trainingY = generateInput('replayCollection.txt')
+print(len(trainingX), len(trainingY))
+svmImplem.trainReplays(trainingX,trainingY)
