@@ -27,6 +27,73 @@ def trainReplays(xTrainData, yTrainData):
 	#
 	# Sigmoid Model
 	#
-	clfSigmoid = svm.SVC(kernel='linear')
+	clfSigmoid = svm.SVC(kernel='sigmoid')
 	clfSigmoid.fit(xTrainData, yTrainData) 
 	joblib.dump(clfSigmoid, 'clfSigmoid.pkl')
+
+
+#
+# A function that given a data test of testing picks out the best model from the replays
+# We use the previously created models from the trainReplays and get a score
+# The higher the score the better the model
+#
+def pickBestModel(xTestData, yTestData):
+	
+	bestFileName = "" # will store the string of the name of the best file 
+	bestScore = 0 # will store the best score from the model
+
+	#
+	# Polynomial model with degree 1
+	#
+	clfPoly = joblib.load('clfPoly.pkl') 
+	score = clfPoly.score(xTestData, xTrainData)
+
+	if(score > bestScore):
+		bestScore = score
+		bestFileName = 'clfPoly.pkl'
+	
+	#
+	# Linear model
+	#
+	clfLinear = joblib.load('clfLinear.pkl') 
+	score = clfLinear.score(xTestData, xTrainData)
+
+	if(score > bestScore):
+		bestScore = score
+		bestFileName = 'clfLinear.pkl'
+	
+	#
+	# Sigmoid Model
+	#
+	clfSigmoid = joblib.load('clfSigmoid.pkl') 
+	score = clfSigmoid.score(xTestData, xTrainData)
+
+	if(score > bestScore):
+		bestScore = score
+		bestFileName = 'clfSigmoid.pkl'
+
+
+	# returns the best score, aka - confidence, and the file name for the best model
+	return bestFileName, bestScore
+
+
+#
+# A function that takes in input from the current going game (or Replay)
+# and outputs whether they think if they will win or not
+# 
+def checkForWin(inputLayer, bestModel):
+
+	#
+	# this loads the best model recieved from the previous function and predict
+	#
+	clf = joblib.load(bestModel)
+	prediction = clf.predict([inputLayer])
+
+	return prediction[0]
+
+
+
+
+
+
+
