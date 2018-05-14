@@ -45,7 +45,7 @@ def pickBestModel(xTestData, yTestData):
     # Polynomial model with degree 1
     #
     clfPoly = joblib.load('clfPoly.pkl')
-    score = clfPoly.score(xTestData, xTrainData)
+    score = clfPoly.score(xTestData, yTestData)
 
     if (score > bestScore):
         bestScore = score
@@ -55,7 +55,7 @@ def pickBestModel(xTestData, yTestData):
     # Linear model
     #
     clfLinear = joblib.load('clfLinear.pkl')
-    score = clfLinear.score(xTestData, xTrainData)
+    score = clfLinear.score(xTestData, yTestData)
 
     if (score > bestScore):
         bestScore = score
@@ -65,7 +65,7 @@ def pickBestModel(xTestData, yTestData):
     # Sigmoid Model
     #
     clfSigmoid = joblib.load('clfSigmoid.pkl')
-    score = clfSigmoid.score(xTestData, xTrainData)
+    score = clfSigmoid.score(xTestData, yTestData)
 
     if (score > bestScore):
         bestScore = score
