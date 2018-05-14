@@ -10,23 +10,14 @@ def generateInput(filepath):
 
        while line:
 
-           # print("Line {}: {}".format(cnt, line.strip()))
            line = line.strip()
            vals = line.split(" ")
-
-           # if cnt == 1:
-           #     x = np.array(len(vals))
-
 
            for i in range(0,len(vals)):
             vals[i] = int(vals[i])
 
-           # if cnt == 1:
-           #     x = np.array(vals)
-           # else:
            x += [vals]
            y += [cnt%2]
-
 
            # READ THE NEXT LINE
            line = fp.readline()
