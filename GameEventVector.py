@@ -17,9 +17,8 @@ def get1HotVec(replay):
 		if type(event) != sc2reader.events.game.CameraEvent and type(event) != sc2reader.events.game.SelectionEvent:
 			# row vector
 			vec = ['', 0, 0, 0]
-			eventInfo = str(event).split()
-			# print event, '\n'
-			vec[0] = eventInfo[0]
+			# get event time as as string
+			vec[0] = event.__str__()[0:5]
 			# if command targets a unit
 			if type(event) == sc2reader.events.game.TargetUnitCommandEvent:
 				# print 'target'
@@ -40,8 +39,9 @@ def get1HotVec(replay):
 
 
 
-replay = loadReplay('/home/hqmai/sc2reader/test_replays/2.0.0.23925/Akilon Wastes.SC2Replay')
-# print get1HotVec(replay)
+# replay = loadReplay('/home/hqmai/sc2reader/test_replays/2.0.0.23925/Akilon Wastes.SC2Replay')
+replay = loadReplay('Lunar Colony V.SC2Replay')
+print get1HotVec(replay)
 
 
 
