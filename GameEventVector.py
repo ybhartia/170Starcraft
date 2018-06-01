@@ -20,11 +20,11 @@ def get1HotVec(replay):
 			# get event time as as string
 			vec[0] = event.__str__()[0:5]
 			# if command targets a unit
-			if type(event) == sc2reader.events.game.TargetUnitCommandEvent:
+			if type(event) == sc2reader.events.game.TargetPointCommandEvent:
 				# print 'target'
 				vec[1] = 1
 			# if command targets a point on the map/screen
-			if type(event) == sc2reader.events.game.TargetPointCommandEvent:
+			if type(event) == sc2reader.events.game.TargetUnitCommandEvent:
 				# print 'aoe'
 				vec[2] = 1
 			# if command doesn't require a target
@@ -34,14 +34,19 @@ def get1HotVec(replay):
 			rtn.append(vec)
 	return rtn
 
+def printGameEventVectors(array2d):
+	print 'Time 	PointCmd 	UnitCmd 	DataCmd'
+	for vec in array2d:
+		print vec[0], '\t', vec[1], '\t\t', vec[2], '\t\t', vec[3]
 
-
-
-
+def printAttributes(replayObj):
+	print replay.attributes
 
 # replay = loadReplay('/home/hqmai/sc2reader/test_replays/2.0.0.23925/Akilon Wastes.SC2Replay')
 replay = loadReplay('Lunar Colony V.SC2Replay')
-print get1HotVec(replay)
+vector = get1HotVec(replay)
+# printGameEventVectors(vector)
+printAttributes(replay)
 
 
 
