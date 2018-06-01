@@ -48,8 +48,8 @@ def commentate(inputString, newLine, speed):
 
 
 def main():
-    commentate("Hey what man this shit is unreal", True, "f")
+    commentate("Hey what man this shit is unreal", True, "m")
 
 
-
-main()
+#
+# main()
