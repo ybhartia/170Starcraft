@@ -107,32 +107,49 @@ def initiateDataVector(player):
     # Merges all the values of the vector
     return vec[:]
 
+
+#
+# Creates a comment and deata entry 
+#
+#
+def getUnitBornEvent(data, players, tracker):
+
+    # Get timestamp in seconds for the array
+    timestamp = str(tracker.second).split()[0]
+    name = str(tracker).split()[4]
+    bot = str(tracker).split()[9]
+
+    # Create the vector for the data table
+    vec = initiateDataVector(players[getplayerNumber(name,players)])
+    vec[0] = int(timestamp)
+    vec[4] = 1
+
+    comment = timestamp+ " " + name + " built a " + bot
+    return comment, data
+
 #
 # This function recieves the trackerEvents subtrack 
-# and calls respective functions to collect the 
+# and calls respective functions to collect the values: 0s or 1s
 #
 def getTrackerEvents(data, comments, players, trackerEvents):
 
+    # For each trackerEvent 
     for tracker in trackerEvents:
+
+        # Get type of the trackerEvent
         myEvent = str(type(tracker)).split('\'')[1].split('.')[3]
+        
+        # Get the timestamp of the trackerEvent
         timestamp = str(tracker).split()[0]
 
-
+        # Ignores events that occur at timestamp 00:00
         if str(timestamp) == "00.00":
             continue
 
+        # Checks if the trackerEvent was a unitBornEvent
         elif (myEvent == "UnitBornEvent"):
             if len(str(tracker).split()) > 9:
-
-                timestamp = str(tracker.second).split()[0]
-                name = str(tracker).split()[4]
-                bot = str(tracker).split()[9]
-
-                vec = initiateDataVector(players[getplayerNumber(name,players)])
-                vec[0] = int(timestamp)
-                vec[4] = 1
-
-                comment = timestamp+ " " + name + " built a " + bot
+                comment, data = getUnitBornEvent(data, players, tracker)
                 comments.append([comment])
                 data.append(vec)
 
