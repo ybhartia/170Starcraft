@@ -15,7 +15,7 @@ def pickRandom(list):
 	index = randint(lower, upper)
 
 	# returning a random number from that list of numbers
-	return list(index)
+	return list[index]
 
 #
 # Intro function that introduces the players and their matchups and win rates if provided
@@ -44,8 +44,8 @@ def getIntroLines():
 #
 # Get a random line from a list of lines regarding completion of unit prodcution
 #
-def getUnitBorn(player, unit):
-	listOfLines = getUnitBornLines()
+def getUnitBornLine(player, unit):
+	listOfLines = getUnitBornLines(player, unit)
 	line = pickRandom(listOfLines)
 	return line
 
@@ -54,9 +54,9 @@ def getUnitBorn(player, unit):
 #
 def getUnitBornLines(player, unit):
 	lines = []
-	lines += [ player + "'s" + unit + " is ready to go." ]
+	lines += [ player + "'s " + unit + " is ready to go." ]
 	lines += [ unit + "'s production is completed for " + player + "." ]
-	lines += [ "What will " + player + " do with that " + unit ]
+	lines += [ "What will " + player + " do with that " + unit + "?"]
 	lines += [ "Hey " + player + " your " + unit + " is here!"]
 	return lines
 
