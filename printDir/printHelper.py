@@ -41,15 +41,31 @@ def introLine():
 	introLines += ["I am Mr. AI, and I will be the commentator for today."]
 	introLines += [ "Hi everyone. I would like to welcome you all to another wonderful day in the world of Blizzard Entertainment. This is an AI commentator bot designed to enhance your viewing experience."]
 
-
-
-
 	# picks one random element from the list
 	#toPrint = pickRandom(introLines)
 
 	# PRINT
 
 	return  introLines
+
+
+#
+# Generates a list of lines regarding a unit's production has been completed
+#
+def getUnitBornLines(player, unit):
+
+	lines = []
+	lines += [ player + "'s" + unit + " is ready to go." ]
+	lines += [ unit + "'s production is completed for " + player + "." ]
+	lines += [ "What will " + player + " do with that " + unit ]
+	lines += [ "Hey " + player + " your " + unit + " is here!"]
+
+	return lines
+
+
+ 
+
+	
 
 
 #
