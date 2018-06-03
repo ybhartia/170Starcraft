@@ -7,7 +7,7 @@ import time,sys
 def commentate(inputString, newLine, speed):
 
     # making sure all inputs are valid
-
+    start = time.time()
     # inputString needs to be a string
     if type(inputString) != str:
         raise Exception("Argument 1 string expected")
@@ -30,7 +30,7 @@ def commentate(inputString, newLine, speed):
 
     # with fast animation, each new character is printed every 4 milliseconds
     if speed == "fast" or speed == "f":
-        frequency = 0.04
+        frequency = 0.01
 
     # with medium animation, each new character is printed every 8 milliseconds
     elif speed == "medium" or speed == "m":
@@ -45,10 +45,16 @@ def commentate(inputString, newLine, speed):
         sys.stdout.write(character)
         sys.stdout.flush()
         time.sleep(frequency)
+    end = time.time()
+    return (end - start)
 
+
+def moveOn(sleeptime):
+    time.sleep(sleeptime)
 
 def main():
-    commentate("Hey what man this shit is unreal", True, "m")
+    timeElapsed = commentate("Hey what man this shit is unreal", True, "f")
+    print(timeElapsed)
 
 
 #

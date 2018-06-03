@@ -21,19 +21,18 @@ def pickRandom(list):
 # Intro function that introduces the players and their matchups and win rates if provided
 # players := replay.clients
 #
-def printIntro(players): 
+def getIntro(players):
 
 
 	# introduces the commentator and the start
-	introLine()
-
-
+	introLines = getIntroLines()
+	intro = pickRandom(introLines)
+	return intro
 
 #
 # Introductory Line 
 #
-def introLine():
-
+def getIntroLines():
 	# variable for holding all the intro lines that will be spoken at the start of the game
 	introLines =[]
 	introLines  += [ "Hey everyone and welcome to my live commentatory of the best game ever. My name is AI and yes I am very intelligent"]
@@ -41,18 +40,10 @@ def introLine():
 	introLines += ["I am Mr. AI, and I will be the commentator for today."]
 	introLines += [ "Hi everyone. I would like to welcome you all to another wonderful day in the world of Blizzard Entertainment. This is an AI commentator bot designed to enhance your viewing experience."]
 
-
-
-
-	# picks one random element from the list
-	#toPrint = pickRandom(introLines)
-
-	# PRINT
-
 	return  introLines
 
 
-#
+
 # Commentate on human or not as well as number of players and races 
 # team_id and is_human
 # #
