@@ -43,6 +43,7 @@ def getIntroLines():
 
 #
 # Get a random line from a list of lines regarding completion of unit prodcution
+# Main;y this is a response to a UnitBornEvent()
 #
 def getUnitBornLine(player, unit):
 	listOfLines = getUnitBornLines(player, unit)
@@ -63,6 +64,8 @@ def getUnitBornLines(player, unit):
 
 #
 # Get a random line from a list of lines regarding a unit's dead
+# Assume the unit actually died and not morph into another unit
+# This is a response to UnitDieEvent()
 #
 def getUnitDieLine(player, unit):
 	listOfLines = getUnitDieLines(player, unit)
@@ -71,6 +74,7 @@ def getUnitDieLine(player, unit):
 
 #
 # Generates a list of lines regarding a unit's production has been completed
+# Assume the unit actually died and not morph into another unit
 #
 def getUnitDieLines(player, unit):
 	lines = []

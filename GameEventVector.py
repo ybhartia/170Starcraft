@@ -45,8 +45,9 @@ def printAttributes(replayObj):
 # replay = loadReplay('/home/hqmai/sc2reader/test_replays/2.0.0.23925/Akilon Wastes.SC2Replay')
 replay = loadReplay('Lunar Colony V.SC2Replay')
 vector = get1HotVec(replay)
+# print type(replay.events)
 # printGameEventVectors(vector)
-printAttributes(replay)
+# printAttributes(replay)
 
 
 
