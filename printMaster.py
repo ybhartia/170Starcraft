@@ -1,6 +1,7 @@
+import master
+import sys
 import printDir.animatePrint as animate
 import printDir.printHelper as helper
-import master
 
 # commentOnList = [[18, 'Trentos', 'Probe', 'UnitBornEvent'], [19, 'Onion', 'Probe', 'UnitBornEvent'], [35, 'Trentos', 'Probe', 'UnitBornEvent'], [36, 'Onion', 'Probe', 'UnitBornEvent']]
 commentOnList = master.getPrintData()
