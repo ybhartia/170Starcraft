@@ -43,7 +43,11 @@ def getIntroLines():
 
 #
 # Get a random line from a list of lines regarding completion of unit prodcution
-# Main;y this is a response to a UnitBornEvent()
+# This is a response to a UnitBornEvent()
+# Not sure if the productions of machinary units (vehicles) are considered
+# 
+# player: the player that the unit belong to
+# unit: the unit being produced
 #
 def getUnitBornLine(player, unit):
 	listOfLines = getUnitBornLines(player, unit)
@@ -51,7 +55,12 @@ def getUnitBornLine(player, unit):
 	return line
 
 #
-# Generates a list of lines regarding a unit's production has been completed
+# Generates a list of lines regarding a unit's production has been 'born'.
+# This is a response to a UnitBornEvent().
+# Not sure if the productions of machinary units (vehicles) are considered
+# 
+# player: the player that the unit belong to
+# unit: the unit being produced
 #
 def getUnitBornLines(player, unit):
 	lines = []
@@ -83,6 +92,9 @@ def getUnitDieLines(player, unit):
 	lines += [ add_a_or_an(unit, True) + " has died, " + player + " should get a new one."]
 	lines += [ player + " doesn't take a good care of that " + unit + ". It's dead."]
 	return lines
+
+
+
 
 #
 # add 'a' or 'an' in front of the noun, returning a string containing 'a' or 'an' concaternated with the noun
