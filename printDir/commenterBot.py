@@ -14,7 +14,7 @@ def Comment(history, comment):
 
     blank = ""
     seperator = ""
-    for i in xrange(0,length + 10):
+    for i in range(0,length + 10):
         seperator += "*"
         blank += " "
 
@@ -28,6 +28,7 @@ def Comment(history, comment):
     history.append(comment)
 
     return history
+
 
 
 history = []
