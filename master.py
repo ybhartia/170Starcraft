@@ -124,7 +124,7 @@ def getUnitBornEvent(data, players, tracker):
     vec[0] = int(timestamp)
     vec[4] = 1
 
-    comment = timestamp+ " " + name + " built a " + bot
+    comment = [int(timestamp), name, bot, "UnitBornEvent"]
     return comment, data
 
 #
@@ -133,7 +133,7 @@ def getUnitBornEvent(data, players, tracker):
 #
 def getTrackerEvents(data, comments, players, trackerEvents):
 
-    # For each trackerEvent 
+    # For each trackerEvent
     for tracker in trackerEvents:
 
         # Get type of the trackerEvent
@@ -143,15 +143,15 @@ def getTrackerEvents(data, comments, players, trackerEvents):
         timestamp = str(tracker).split()[0]
 
         # Ignores events that occur at timestamp 00:00
-        if str(timestamp) == "00.00":
+        if timestamp == "00.00":
             continue
 
         # Checks if the trackerEvent was a unitBornEvent
         elif (myEvent == "UnitBornEvent"):
             if len(str(tracker).split()) > 9:
                 comment, data = getUnitBornEvent(data, players, tracker)
-                comments.append([comment])
-                data.append(vec)
+                comments.append(comment)
+                data.append(comments)
 
     return data, comments
 
@@ -165,7 +165,6 @@ players = initiatePlayers(replay)
 
 data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events)
 
-print(data)
 
 
 # print (type(replay.game_events[0]) == sc2reader.events.game.CameraEvent)
