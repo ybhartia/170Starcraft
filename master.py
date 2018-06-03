@@ -4,7 +4,7 @@ from sc2reader.engine.plugins import APMTracker
 
 #
 # This is the currently completed format of the input layer
-# [time, isProtoss, isZerg, isTerran, didBuildUnit, , , , , result]
+# [time, isProtoss, isZerg, isTerran, UnitBornEvent, UnitDiedEvent, UnitTypeChangeEvent, UpgradeCompleteEvent, UpdateTargetUnitCommandEvent, UnitOwnerChangeEvent, ResourceRequestEvent, ResourceRequestFulfillEvent, ResourceRequestCancelEvent, PlayerLeaveEvent, result]
 #
 
 #Replay location
@@ -86,7 +86,7 @@ def getplayerNumber(name,players):
 def initiateDataVector(player):
 
     vec = []
-    k = 8
+    k = 10
     # Creates a vector of 0s with a size of k
     for i in range(0,k):
         vec.append(0)
@@ -103,6 +103,7 @@ def initiateDataVector(player):
     # certain player to a  1 or a 0
     if player.result == 1:
         vec[len(vec) - 1 ] = 1
+   # print(player.playerName, " ", player.result)
 
     # Merges all the values of the vector
     return vec[:]
@@ -201,19 +202,40 @@ def getUpgradeCompleteEvent(players, tracker):
     comment = [int(timestamp), name, bot, "UpgradeCompleteEvent"]
     return vec, comment
 
+def getUpdateTargetUnitCommandEvent(players, event):
+
+    # Get timestamp in seconds for the array
+    timestamp = str(event.second).split()[0]
+    name = str(event).split()[1]
+
+    if(name == "A.I."):
+        bot = str(event).split()[9]
+    else:
+        bot = str(event).split()[5]
+
+    # Create the vector for the data table
+    vec = initiateDataVector(players[getplayerNumber(name,players)])
+    vec[0] = int(timestamp)
+    vec[7] = 1
+
+    comment = [int(timestamp), name, bot, "UpdateTargetUnitCommandEvent"]
+    return vec, comment
+
+
 
 #
 # This function recieves the trackerEvents subtrack 
 # and calls respective functions to collect the values: 0s or 1s
 #
 def getTrackerEvents(data, comments, players, trackerEvents):
-
+    tempComments = ""
+    tempData = ""
     # For each trackerEvent
     for tracker in trackerEvents:
 
         # Get type of the trackerEvent
         myEvent = str(type(tracker)).split('\'')[1].split('.')[3]
-        
+
         # Get the timestamp of the trackerEvent
         timestamp = str(tracker).split()[0]
 
@@ -225,29 +247,24 @@ def getTrackerEvents(data, comments, players, trackerEvents):
         elif (myEvent == "UnitBornEvent"):
             if len(str(tracker).split()) > 9:
                 tempData, tempComments = getUnitBornEvent(players, tracker)
-                comments.append(tempComments)
-                data.append(tempData)
 
         # Checks if the trackerEvent was a unitDiedEvent
         elif (myEvent == "UnitDiedEvent"):
             if len(str(tracker).split()) > 9:
                 tempData, tempComments = getUnitDiedEvent(players, tracker)
-                comments.append(tempComments)
-                data.append(tempData)
 
         # Checks if the trackerEvent was a unitTypeChangeEvent
         elif (myEvent == "UnitTypeChangeEvent"):
             if len(str(tracker).split()) > 9:
                 tempData, tempComments = getUnitTypeChangeEvent(players, tracker)
-                comments.append(tempComments)
-                data.append(tempData)
 
         # Checks if the trackerEvent was a unitTypeChangeEvent
         elif (myEvent == "UpgradeCompleteEvent"):
             if len(str(tracker).split()) > 9:
                 tempData, tempComments = getUpgradeCompleteEvent(players, tracker)
-                comments.append(tempComments)
-                data.append(tempData)
+
+        comments.append(tempComments)
+        data.append(tempData)
 
     return data[1:], comments[1:]
 
@@ -255,6 +272,29 @@ def getTrackerEvents(data, comments, players, trackerEvents):
 #
 # function that print calls to get data to print
 #
+
+def getGameEvents(data, comments, players, Events):
+    # Get type of the trackerEvent
+    for event in Events:
+        myEvent = str(type(event)).split('\'')[1].split('.')[3]
+        #print(myEvent)
+        # Get the timestamp of the trackerEvent
+        timestamp = str(event).split()[0]
+
+        # Ignores events that occur at timestamp 00:00
+        if timestamp == "00.00":
+            continue
+
+        elif myEvent == "UpdateTargetUnitCommandEvent":
+            if len(str(event).split()) > 8:
+                tempData, tempComments = getUpdateTargetUnitCommandEvent(players, event)
+                comments.append(tempComments)
+                data.append(tempData)
+
+        # elif myEvent == "PlayerLeaveEvent":
+        #     print(event)
+
+    return data[1:], comments[1:]
 def getPrintData():
 
     sc2reader.engine.register_plugin(APMTracker())
@@ -266,6 +306,7 @@ def getPrintData():
     # printPlayers(players)
 
     data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events)
+    data, unitStatusComments = getGameEvents(data, unitStatusComments, players, replay.events)
     print(data)
     print(unitStatusComments)
 
