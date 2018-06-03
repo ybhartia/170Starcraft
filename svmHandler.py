@@ -18,7 +18,7 @@ def seperateWinner(rawData):
 	for element in rawData:
 
 		if(element[-1] == MACRO_PLAYER_LOST):
-			rawDataLost += [element]
+			rawDataLost += [ele
 		else:
 			rawDataWin += [element]
 
@@ -27,7 +27,6 @@ def seperateWinner(rawData):
 	rawDataLost = np.array(rawDataLost[1:])
 	rawDataWin = rawDataWin[:,:-1]
 	rawDataLost = rawDataLost[:,:-1]
-
 
 	return rawDataWin, rawDataLost
 

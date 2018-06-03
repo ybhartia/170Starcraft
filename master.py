@@ -8,7 +8,7 @@ from sc2reader.engine.plugins import APMTracker
 #
 
 #Replay location
-myReplay = '/Users/sakshambhalla/Downloads/ggtracker_93731.SC2Replay'
+myReplay = 'workingReplays/ggtracker_93727.SC2Replay'
 
 #
 # The player data that is used to initialize the input vectors
@@ -86,7 +86,7 @@ def getplayerNumber(name,players):
 def initiateDataVector(player):
 
     vec = []
-    k = 6
+    k = 8
     # Creates a vector of 0s with a size of k
     for i in range(0,k):
         vec.append(0)
@@ -112,12 +112,16 @@ def initiateDataVector(player):
 # Creates a comment and deata entry 
 #
 #
-def getUnitBornEvent(data, players, tracker):
+def getUnitBornEvent(players, tracker):
 
     # Get timestamp in seconds for the array
     timestamp = str(tracker.second).split()[0]
     name = str(tracker).split()[4]
-    bot = str(tracker).split()[9]
+
+    if(name == "A.I."):
+        bot = str(tracker).split()[11]
+    else:
+        bot = str(tracker).split()[9]
 
     # Create the vector for the data table
     vec = initiateDataVector(players[getplayerNumber(name,players)])
@@ -125,7 +129,78 @@ def getUnitBornEvent(data, players, tracker):
     vec[4] = 1
 
     comment = [int(timestamp), name, bot, "UnitBornEvent"]
-    return comment, data
+    return vec, comment
+
+#
+# Creates a comment and deata entry
+#
+#
+def getUnitDiedEvent(players, tracker):
+
+    # Get timestamp in seconds for the array
+    timestamp = str(tracker.second).split()[0]
+    name = str(tracker).split()[4]
+
+    if(name == "A.I."):
+        bot = str(tracker).split()[11]
+    else:
+        bot = str(tracker).split()[9]
+
+    # Create the vector for the data table
+    vec = initiateDataVector(players[getplayerNumber(name,players)])
+    vec[0] = int(timestamp)
+    vec[5] = 1
+
+    comment = [int(timestamp), name, bot, "UnitDiedEvent"]
+    return vec, comment
+
+#
+# Creates a comment and deata entry
+#
+#
+def getUnitTypeChangeEvent(players, tracker):
+
+    # Get timestamp in seconds for the array
+    timestamp = str(tracker.second).split()[0]
+    name = str(tracker).split()[4]
+    bot = str(tracker).split()[16]
+
+    if(name == "A.I."):
+        bot = str(tracker).split()[20]
+    else:
+        bot = str(tracker).split()[16]
+
+    # Create the vector for the data table
+    vec = initiateDataVector(players[getplayerNumber(name,players)])
+    vec[0] = int(timestamp)
+    vec[6] = 1
+
+    comment = [int(timestamp), name, bot, "UnitTypeChangeEvent"]
+    return vec, comment
+
+#
+# Creates a comment and deata entry
+#
+#
+def getUpgradeCompleteEvent(players, tracker):
+
+    # Get timestamp in seconds for the array
+    timestamp = str(tracker.second).split()[0]
+    name = str(tracker).split()[4]
+
+    if(name == "A.I."):
+        bot = str(tracker).split()[9]
+    else:
+        bot = str(tracker).split()[7]
+
+    # Create the vector for the data table
+    vec = initiateDataVector(players[getplayerNumber(name,players)])
+    vec[0] = int(timestamp)
+    vec[6] = 1
+
+    comment = [int(timestamp), name, bot, "UpgradeCompleteEvent"]
+    return vec, comment
+
 
 #
 # This function recieves the trackerEvents subtrack 
@@ -149,22 +224,54 @@ def getTrackerEvents(data, comments, players, trackerEvents):
         # Checks if the trackerEvent was a unitBornEvent
         elif (myEvent == "UnitBornEvent"):
             if len(str(tracker).split()) > 9:
-                comment, data = getUnitBornEvent(data, players, tracker)
-                comments.append(comment)
-                data.append(comments)
+                tempData, tempComments = getUnitBornEvent(players, tracker)
+                comments.append(tempComments)
+                data.append(tempData)
 
-    return data, comments
+        # Checks if the trackerEvent was a unitDiedEvent
+        elif (myEvent == "UnitDiedEvent"):
+            if len(str(tracker).split()) > 9:
+                tempData, tempComments = getUnitDiedEvent(players, tracker)
+                comments.append(tempComments)
+                data.append(tempData)
 
-sc2reader.engine.register_plugin(APMTracker())
-replay = sc2reader.load_replay(myReplay, load_level=4)
-data = [[]]
-unitStatusComments = [[]]
+        # Checks if the trackerEvent was a unitTypeChangeEvent
+        elif (myEvent == "UnitTypeChangeEvent"):
+            if len(str(tracker).split()) > 9:
+                tempData, tempComments = getUnitTypeChangeEvent(players, tracker)
+                comments.append(tempComments)
+                data.append(tempData)
 
-players = initiatePlayers(replay)
-# printPlayers(players)
+        # Checks if the trackerEvent was a unitTypeChangeEvent
+        elif (myEvent == "UpgradeCompleteEvent"):
+            if len(str(tracker).split()) > 9:
+                tempData, tempComments = getUpgradeCompleteEvent(players, tracker)
+                comments.append(tempComments)
+                data.append(tempData)
 
-data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events)
+    return data[1:], comments[1:]
 
 
+#
+# function that print calls to get data to print
+#
+def getPrintData():
+
+    sc2reader.engine.register_plugin(APMTracker())
+    replay = sc2reader.load_replay(myReplay, load_level=4)
+    data = [[]]
+    unitStatusComments = [[]]
+
+    players = initiatePlayers(replay)
+    # printPlayers(players)
+
+    data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events)
+    print(data)
+    print(unitStatusComments)
+
+    return unitStatusComments
+
+
+getPrintData()
 
 # print (type(replay.game_events[0]) == sc2reader.events.game.CameraEvent)
