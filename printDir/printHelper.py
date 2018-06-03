@@ -61,6 +61,35 @@ def getUnitBornLines(player, unit):
 	return lines
 
 
+#
+# Get a random line from a list of lines regarding a unit's dead
+#
+def getUnitDieLine(player, unit):
+	listOfLines = getUnitDieLines(player, unit)
+	line = pickRandom(listOfLines)
+	return line
+
+#
+# Generates a list of lines regarding a unit's production has been completed
+#
+def getUnitDieLines(player, unit):
+	lines = []
+	lines += [ player + "'s " + unit + " has been destroyed!"]
+	lines += [ player + " has lost " + add_a_or_an(unit, False) + "." ]
+	lines += [ add_a_or_an(unit, True) + " has died, " + player + " should get a new one."]
+	lines += [ player + " doesn't take a good care of that " + unit + ". It's dead."]
+	return lines
+
+#
+# add 'a' or 'an' in front of the noun, returning a string containing 'a' or 'an' concaternated with the noun
+# @cap is a boolean, indicating capitalization
+#
+def add_a_or_an(noun, cap):
+	if noun[0] == 'a' or noun[0] == 'e' or noun[0] == 'i' or noun[0] == 'o' or noun[0] == 'u':
+		return ("An " if cap else 'an ') + noun
+	else:
+		return ("A " if cap else 'a ') + noun
+
 
 
 
