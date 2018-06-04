@@ -5,10 +5,11 @@ import printDir.printHelper as helper
 import SVM.svmHandler as svmHandler
 from os import listdir
 
+# commentOnList = [[18, 'Trentos', 'Probe', 'UnitBornEvent'], [19, 'Onion', 'Probe', 'UnitBornEvent'], [35, 'Trentos', 'Probe', 'UnitBornEvent'], [36, 'Onion', 'Probe', 'UnitBornEvent']]
+
 DIR_NAME = "workingReplays"
 DIR_SEPARATOR = '/'
 TEST_REPLAY = "workingReplays/OneSideDominates.SC2Replay"
-# commentOnList = [[18, 'Trentos', 'Probe', 'UnitBornEvent'], [19, 'Onion', 'Probe', 'UnitBornEvent'], [35, 'Trentos', 'Probe', 'UnitBornEvent'], [36, 'Onion', 'Probe', 'UnitBornEvent']]
 
 #
 #
@@ -67,12 +68,14 @@ def trainSVM():
 #
 #
 def runProject():
-    crap,commentOnList = parser.getPrintData(TEST_REPLAY)
+    commentOnList = parser.getPrintData(TEST_REPLAY)
     hotVectorData = parser.getTestHotVectorData(TEST_REPLAY)
     yOut1,yOut2 = svmHandler.callTestSVM(hotVectorData)
     print("Player 1 : ",yOut1)
     print("Player 2 : ", yOut2)
     comment(commentOnList)
+
+
 
 trainSVM()
 # runProject()
