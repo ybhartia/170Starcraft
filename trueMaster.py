@@ -1,9 +1,9 @@
-import parsing.master as parser
+import parsing.parser as parser
 import sys
 import printDir.animatePrint as animate
 import printDir.printHelper as helper
 import SVM.svmHandler as svmHandler
-
+from os import listdir
 
 DIR_NAME = "workingReplays"
 DIR_SEPARATOR = '/'
@@ -44,15 +44,19 @@ def trainSVM():
     # going through the directory
     for filename in listdir(DIR_NAME):
 
+
         # Setting right path to filename
-        filname = DIR_NAME + DIR_SEPARATOR + filename
+        filename = DIR_NAME + DIR_SEPARATOR + filename
 
         # Not training with the test replay
-        if(filename != TEST_REPLAY):
-            hotVectorData = parser.getTrainData(filename)
+        if(filename != TEST_REPLAY) and filename[len(DIR_NAME) + len(DIR_SEPARATOR)] != '.' and filename == 'workingReplays/ggtracker_93731.SC2Replay':
+
+            hotVectorData = parser.getTrainHotVectorData(filename)
             xTempTrainData, yTempTrainData = svmHandler.callTrainSVM(hotVectorData)
-            xTrainData += [xTempTrainData]
-            yTrainData += [yTrainData]
+
+            for temp in xTempTrainData:
+                xTrainData.append(temp)
+            yTrainData += yTempTrainData
 
     svmHandler.callTrainReplays(xTrainData[1:], yTrainData)
 
@@ -63,13 +67,13 @@ def trainSVM():
 #
 #
 def runProject():
-    commentOnList = parser.getPrintData(TEST_REPLAY)
-    hotVectorData = parser.getHotVectorData(TEST_REPLAY)
+    crap,commentOnList = parser.getPrintData(TEST_REPLAY)
+    hotVectorData = parser.getTestHotVectorData(TEST_REPLAY)
     yOut1,yOut2 = svmHandler.callTestSVM(hotVectorData)
     print("Player 1 : ",yOut1)
     print("Player 2 : ", yOut2)
     comment(commentOnList)
 
 trainSVM()
-runProject()
+# runProject()
 

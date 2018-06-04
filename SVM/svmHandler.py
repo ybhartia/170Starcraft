@@ -57,7 +57,7 @@ def callTrainSVM(rawData):
 				# updating x and y train data 
 				temp[0] = seconds/60
 				xTrainData += [temp]
-				yTranData += [2]
+				yTranData += [1]
 				winCounter += 1
 
 			# set a new temp and update seconds to move to next minute
@@ -73,7 +73,7 @@ def callTrainSVM(rawData):
 	# include last data into last minute and update
 	temp[0] = seconds/60
 	xTrainData += [temp]
-	yTranData += [2]
+	yTranData += [1]
 	temp = []
 	winCounter += 1
 
@@ -85,7 +85,7 @@ def callTrainSVM(rawData):
 			if(temp != []):
 				temp[0] = seconds/60
 				xTrainData += [temp]
-				yTranData += [1]
+				yTranData += [0]
 				lossCounter += 1
 			temp = element
 			seconds += 60
@@ -98,7 +98,7 @@ def callTrainSVM(rawData):
 
 	temp[0] = seconds/60
 	xTrainData += [temp]
-	yTranData += [1]
+	yTranData += [0]
 	lossCounter += 1
 
 	if(winCounter != lossCounter):
