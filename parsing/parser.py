@@ -356,12 +356,15 @@ def getWinner(myReplay):
     #Traverse over all players
     for player in replay.people:
 
+        name = str(player).split()
+        playerName = name[3]
+
         # Get teamid  from the player's data
         teamid = player.team_id
 
         # If this particular player wins, return the teamid
         if player.result == "Win":
-            return teamid
+            return playerName
 
     # Returns -1 if none of the players won
     return -1
@@ -369,6 +372,6 @@ def getWinner(myReplay):
 #Replay location
 # myReplay = 'workingReplays/OneSideDominates.SC2Replay'
 # a = getTrainHotVectorData(myReplay)
-#
+# #
 # print(getWinner(myReplay))
 # print (type(replay.game_events[0]) == sc2reader.events.game.CameraEvent)
