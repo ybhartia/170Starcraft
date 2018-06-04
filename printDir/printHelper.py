@@ -46,8 +46,8 @@ def getIntroLines():
 # This is a response to a UnitBornEvent()
 # Not sure if the productions of machinary units (vehicles) are considered
 # 
-# player: the player that the unit belong to
-# unit: the unit being produced
+# player: string contains the player's name that the unit belong to
+# unit: string contains unit's type being produced
 #
 def getUnitBornLine(player, unit):
 	listOfLines = getUnitBornLines(player, unit)
@@ -59,8 +59,8 @@ def getUnitBornLine(player, unit):
 # This is a response to a UnitBornEvent().
 # Not sure if the productions of machinary units (vehicles) are considered
 # 
-# player: the player that the unit belong to
-# unit: the unit being produced
+# player: string contains the player's name that the unit belong to
+# unit: string contains unit's type being produced
 #
 def getUnitBornLines(player, unit):
 	lines = []
@@ -75,6 +75,9 @@ def getUnitBornLines(player, unit):
 # Get a random line from a list of lines regarding a unit's dead
 # Assume the unit actually died and not morph into another unit
 # This is a response to UnitDieEvent()
+# 
+# player: string contains the player's name that the unit belong to
+# unit: string contains unit's type being produced
 #
 def getUnitDieLine(player, unit):
 	listOfLines = getUnitDieLines(player, unit)
@@ -84,6 +87,9 @@ def getUnitDieLine(player, unit):
 #
 # Generates a list of lines regarding a unit's production has been completed
 # Assume the unit actually died and not morph into another unit
+# 
+# player: string contains the player's name that the unit belong to
+# unit: string contains unit's type being produced
 #
 def getUnitDieLines(player, unit):
 	lines = []
@@ -93,11 +99,60 @@ def getUnitDieLines(player, unit):
 	lines += [ player + " doesn't take a good care of that " + unit + ". It's dead."]
 	return lines
 
+def getUpgradeCompleteLine(player, upgrade, unit):
+	listOfLines = getUpgradeCompleteLines(player, upgrade, unit)
+	line = pickRandom(listOfLines)
+	return line
+
+def getUpgradeCompleteLines(player, upgrade, unit):
+	lines = []
+	lines += [ upgrade + " upgrade completed for " + player + "." ]
+	lines += [ upgrade + " upgrade is done. More power to " + player + "."]
+	lines += [ player + " now has " + upgrade + "." ]
+	if unit != "":
+		lines += [ player + "'s " + unit + "'s power has been increased." ]
+	return lines
 
 
+
+def getTypeChangeLine(player, unit, previous, faction, isBuilding):
+	listOfLines = getTypeChangeLines(player, unit, previous, faction, isBuilding)
+	line = pickRandom(listOfLines)
+	return line
+
+#
+# player, unit, previous, faction are strings, previous is the name of previous unit
+# isBuilding is a boolean 
+#
+def getTypeChangeLines(player, unit, previous, faction, isBuilding):
+	lines = []
+	if faction == "Terran":
+		if isBuilding:
+			lines += [ player + "'s " + unit + " completed." ]
+		else:
+			lines += [ player + "'s " + previous + " has switch to " + unit + " mode."]
+	elif faction == "Zerg":
+		lines += [ player + "'s " + previous + " has morphed to " + unit ]
+	elif faction == "Protoss":
+		if isBuilding:
+			lines += [ player + "'s " + unit + " completed." ]
+		else:
+			lines += [ player + "'s " + previous + " has switch to " + unit + " mode."]
+	return lines
+
+#
+# This can be used to replace get random line functions that only requires 2 parameters
+# Example: to call getUnitBornLine(player, unit)
+#		Calls getLine(player, unit, getUnitBornLine)
+#
+def getLine(player, unit, function):
+	listOfLines = function(player, unit)
+	line = pickRandom(listOfLines)
+	return line
 
 #
 # add 'a' or 'an' in front of the noun, returning a string containing 'a' or 'an' concaternated with the noun
+#
 # @cap is a boolean, indicating capitalization
 #
 def add_a_or_an(noun, cap):
@@ -106,7 +161,22 @@ def add_a_or_an(noun, cap):
 	else:
 		return ("A " if cap else 'a ') + noun
 
+#
+# Check if unit should be ignore (if it dies or borns)
+#
+# @unit: string contains the name of the unit
+#
+def shouldIgnore(unit):
+	insignificantUnits = [
+		"Larva"
+	]
+	if unit in insignificantUnits:
+		return True
+	return False
 
+
+print getTypeChangeLine("Hung", "Banneling", "Zergling", "Zerg", False)
+print getUpgradeCompleteLine("Hung", "Zerg Attact Increase", "Zergling")
 
 
 # Commentate on human or not as well as number of players and races 

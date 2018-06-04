@@ -45,12 +45,14 @@ def printAttributes(replayObj):
 # replay = loadReplay('/home/hqmai/sc2reader/test_replays/2.0.0.23925/Akilon Wastes.SC2Replay')
 # replay = loadReplay('Lunar Colony V.SC2Replay')
 # replay = loadReplay('workingReplays/ggtracker_93739.SC2Replay')
-replay = loadReplay('OneSideDominates.SC2Replay')
+# replay = loadReplay('OneSideDominates.SC2Replay')
+replay = loadReplay('workingReplays/TerranDoAll.SC2Replay')
 vector = get1HotVec(replay)
 # print replay.tracker_events
 for event in replay.tracker_events:
-	print event
-	print type(event), '\n'
+	if event.__str__()[0:5] != '00.00' and type(event) == sc2reader.events.tracker.UnitTypeChangeEvent:
+		print event
+		print type(event), '\n'
 # print type(replay.events)
 # printGameEventVectors(vector)
 # printAttributes(replay)
