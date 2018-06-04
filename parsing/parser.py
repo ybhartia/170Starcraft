@@ -46,7 +46,7 @@ def printPlayers(players):
 #
 def initiatePlayers(replay):
     players = []
-    for player in replay.clients:
+    for player in replay.people:
         obj = Player()
         name = str(player).split()
 
@@ -347,7 +347,7 @@ def getTestHotVectorData(myReplay): # TODO: append team_id instead of Win/Loss
 
 
 #Replay location
-myReplay = 'workingReplays/ggtracker_93731.SC2Replay'
+myReplay = 'workingReplays/OneSideDominates.SC2Replay'
 getPrintData(myReplay)
 
 # print (type(replay.game_events[0]) == sc2reader.events.game.CameraEvent)
