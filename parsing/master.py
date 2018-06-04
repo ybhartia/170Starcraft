@@ -7,8 +7,6 @@ from sc2reader.engine.plugins import APMTracker
 # [time, isProtoss, isZerg, isTerran, UnitBornEvent, UnitDiedEvent, UnitTypeChangeEvent, UpgradeCompleteEvent, UpdateTargetUnitCommandEvent, UnitOwnerChangeEvent, ResourceRequestEvent, ResourceRequestFulfillEvent, ResourceRequestCancelEvent, PlayerLeaveEvent, result]
 #
 
-#Replay location
-myReplay = 'workingReplays/ggtracker_93731.SC2Replay'
 
 #
 # The player data that is used to initialize the input vectors
@@ -83,7 +81,7 @@ def getplayerNumber(name,players):
 # Initiates the data vector to be returned based on the player 
 # data that we recieve we follow the template above( Line 10 )
 #
-def initiateDataVector(player):
+def initiateDataVector(player, testOrTrain):
 
     vec = []
     k = 10
@@ -101,8 +99,11 @@ def initiateDataVector(player):
 
     # Sets the given result of the replay for the 
     # certain player to a  1 or a 0
-    if player.result == 1:
-        vec[len(vec) - 1 ] = 1
+    if testOrTrain == "train":
+        if player.result == 1:
+            vec[len(vec) - 1 ] = 1
+    else:
+        vec[len(vec) - 1] = player.teamid
    # print(player.playerName, " ", player.result)
 
     # Merges all the values of the vector
@@ -113,7 +114,7 @@ def initiateDataVector(player):
 # Creates a comment and deata entry 
 #
 #
-def getUnitBornEvent(players, tracker):
+def getUnitBornEvent(players, tracker, testOrTrain):
 
     # Get timestamp in seconds for the array
     timestamp = str(tracker.second).split()[0]
@@ -125,7 +126,7 @@ def getUnitBornEvent(players, tracker):
         bot = str(tracker).split()[9]
 
     # Create the vector for the data table
-    vec = initiateDataVector(players[getplayerNumber(name,players)])
+    vec = initiateDataVector(players[getplayerNumber(name,players)], testOrTrain)
     vec[0] = int(timestamp)
     vec[4] = 1
 
@@ -136,7 +137,7 @@ def getUnitBornEvent(players, tracker):
 # Creates a comment and deata entry
 #
 #
-def getUnitDiedEvent(players, tracker):
+def getUnitDiedEvent(players, tracker, testOrTrain):
 
     # Get timestamp in seconds for the array
     timestamp = str(tracker.second).split()[0]
@@ -148,7 +149,7 @@ def getUnitDiedEvent(players, tracker):
         bot = str(tracker).split()[9]
 
     # Create the vector for the data table
-    vec = initiateDataVector(players[getplayerNumber(name,players)])
+    vec = initiateDataVector(players[getplayerNumber(name,players)], testOrTrain)
     vec[0] = int(timestamp)
     vec[5] = 1
 
@@ -159,7 +160,7 @@ def getUnitDiedEvent(players, tracker):
 # Creates a comment and deata entry
 #
 #
-def getUnitTypeChangeEvent(players, tracker):
+def getUnitTypeChangeEvent(players, tracker, testOrTrain):
 
     # Get timestamp in seconds for the array
     timestamp = str(tracker.second).split()[0]
@@ -172,7 +173,7 @@ def getUnitTypeChangeEvent(players, tracker):
         bot = str(tracker).split()[16]
 
     # Create the vector for the data table
-    vec = initiateDataVector(players[getplayerNumber(name,players)])
+    vec = initiateDataVector(players[getplayerNumber(name,players)], testOrTrain)
     vec[0] = int(timestamp)
     vec[6] = 1
 
@@ -183,7 +184,7 @@ def getUnitTypeChangeEvent(players, tracker):
 # Creates a comment and deata entry
 #
 #
-def getUpgradeCompleteEvent(players, tracker):
+def getUpgradeCompleteEvent(players, tracker, testOrTrain):
 
     # Get timestamp in seconds for the array
     timestamp = str(tracker.second).split()[0]
@@ -195,14 +196,14 @@ def getUpgradeCompleteEvent(players, tracker):
         bot = str(tracker).split()[7]
 
     # Create the vector for the data table
-    vec = initiateDataVector(players[getplayerNumber(name,players)])
+    vec = initiateDataVector(players[getplayerNumber(name,players)], testOrTrain)
     vec[0] = int(timestamp)
     vec[6] = 1
 
     comment = [int(timestamp), name, bot, "UpgradeCompleteEvent"]
     return vec, comment
 
-def getUpdateTargetUnitCommandEvent(players, event):
+def getUpdateTargetUnitCommandEvent(players, event, testOrTrain):
 
     # Get timestamp in seconds for the array
     timestamp = str(event.second).split()[0]
@@ -214,7 +215,7 @@ def getUpdateTargetUnitCommandEvent(players, event):
         bot = str(event).split()[5]
 
     # Create the vector for the data table
-    vec = initiateDataVector(players[getplayerNumber(name,players)])
+    vec = initiateDataVector(players[getplayerNumber(name,players)], testOrTrain )
     vec[0] = int(timestamp)
     vec[7] = 1
 
@@ -227,7 +228,7 @@ def getUpdateTargetUnitCommandEvent(players, event):
 # This function recieves the trackerEvents subtrack 
 # and calls respective functions to collect the values: 0s or 1s
 #
-def getTrackerEvents(data, comments, players, trackerEvents):
+def getTrackerEvents(data, comments, players, trackerEvents, testOrTrain):
     tempComments = ""
     tempData = ""
     # For each trackerEvent
@@ -246,22 +247,22 @@ def getTrackerEvents(data, comments, players, trackerEvents):
         # Checks if the trackerEvent was a unitBornEvent
         elif (myEvent == "UnitBornEvent"):
             if len(str(tracker).split()) > 9:
-                tempData, tempComments = getUnitBornEvent(players, tracker)
+                tempData, tempComments = getUnitBornEvent(players, tracker, testOrTrain)
 
         # Checks if the trackerEvent was a unitDiedEvent
         elif (myEvent == "UnitDiedEvent"):
             if len(str(tracker).split()) > 9:
-                tempData, tempComments = getUnitDiedEvent(players, tracker)
+                tempData, tempComments = getUnitDiedEvent(players, tracker, testOrTrain)
 
         # Checks if the trackerEvent was a unitTypeChangeEvent
         elif (myEvent == "UnitTypeChangeEvent"):
             if len(str(tracker).split()) > 9:
-                tempData, tempComments = getUnitTypeChangeEvent(players, tracker)
+                tempData, tempComments = getUnitTypeChangeEvent(players, tracker, testOrTrain)
 
         # Checks if the trackerEvent was a unitTypeChangeEvent
         elif (myEvent == "UpgradeCompleteEvent"):
             if len(str(tracker).split()) > 9:
-                tempData, tempComments = getUpgradeCompleteEvent(players, tracker)
+                tempData, tempComments = getUpgradeCompleteEvent(players, tracker, testOrTrain)
 
         comments.append(tempComments)
         data.append(tempData)
@@ -272,8 +273,7 @@ def getTrackerEvents(data, comments, players, trackerEvents):
 #
 # function that print calls to get data to print
 #
-
-def getGameEvents(data, comments, players, Events):
+def getGameEvents(data, comments, players, Events, testOrTrain):
     # Get type of the trackerEvent
     for event in Events:
         myEvent = str(type(event)).split('\'')[1].split('.')[3]
@@ -287,15 +287,15 @@ def getGameEvents(data, comments, players, Events):
 
         elif myEvent == "UpdateTargetUnitCommandEvent":
             if len(str(event).split()) > 8:
-                tempData, tempComments = getUpdateTargetUnitCommandEvent(players, event)
+                tempData, tempComments = getUpdateTargetUnitCommandEvent(players, event, testOrTrain)
                 comments.append(tempComments)
                 data.append(tempData)
 
-        # elif myEvent == "PlayerLeaveEvent":
-        #     print(event)
+
 
     return data[1:], comments[1:]
-def getPrintData():
+
+def getPrintData(myReplay):
 
     sc2reader.engine.register_plugin(APMTracker())
     replay = sc2reader.load_replay(myReplay, load_level=4)
@@ -305,14 +305,14 @@ def getPrintData():
     players = initiatePlayers(replay)
     # printPlayers(players)
 
-    data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events)
-    data, unitStatusComments = getGameEvents(data, unitStatusComments, players, replay.events)
+    data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events, "test")
+    data, unitStatusComments = getGameEvents(data, unitStatusComments, players, replay.events, "test")
     # print(data)
     # print(unitStatusComments)
 
     return unitStatusComments[1:]
 
-def getHotVectorData():
+def getTrainHotVectorData(myReplay):
 
     sc2reader.engine.register_plugin(APMTracker())
     replay = sc2reader.load_replay(myReplay, load_level=4)
@@ -322,12 +322,32 @@ def getHotVectorData():
     players = initiatePlayers(replay)
     # printPlayers(players)
 
-    data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events)
-    data, unitStatusComments = getGameEvents(data, unitStatusComments, players, replay.events)
+    data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events,"train")
+    data, unitStatusComments = getGameEvents(data, unitStatusComments, players, replay.events,"train")
+
+    return data[1:]
+
+def getTestHotVectorData(myReplay): # TODO: append team_id instead of Win/Loss
+
+    sc2reader.engine.register_plugin(APMTracker())
+    replay = sc2reader.load_replay(myReplay, load_level=4)
+    data = [[]]
+    unitStatusComments = [[]]
+
+    players = initiatePlayers(replay)
+    # printPlayers(players)
+
+    data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events, "test")
+    data, unitStatusComments = getGameEvents(data, unitStatusComments, players, replay.events, "test")
+
+
 
     return data[1:]
 
 
-getPrintData()
+
+#Replay location
+myReplay = 'workingReplays/ggtracker_93731.SC2Replay'
+getPrintData(myReplay)
 
 # print (type(replay.game_events[0]) == sc2reader.events.game.CameraEvent)
