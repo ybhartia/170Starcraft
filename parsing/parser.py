@@ -324,6 +324,9 @@ def getTrainHotVectorData(myReplay):
 
     data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events,"train")
     data, unitStatusComments = getGameEvents(data, unitStatusComments, players, replay.events,"train")
+    #
+    # for line in data:
+    #     print(line)
 
     return data[1:]
 
@@ -345,9 +348,27 @@ def getTestHotVectorData(myReplay): # TODO: append team_id instead of Win/Loss
     return data[1:]
 
 
+def getWinner(replay):
+
+    sc2reader.engine.register_plugin(APMTracker())
+    replay = sc2reader.load_replay(replay, load_level=4)
+
+    #Traverse over all players
+    for player in replay.people:
+
+        # Get teamid  from the player's data
+        teamid = player.team_id
+
+        # If this particular player wins, return the teamid
+        if player.result == "Win":
+            return teamid
+
+    # Returns -1 if none of the players won
+    return -1
 
 #Replay location
-myReplay = 'workingReplays/OneSideDominates.SC2Replay'
-getPrintData(myReplay)
-
+# myReplay = 'workingReplays/OneSideDominates.SC2Replay'
+# a = getTrainHotVectorData(myReplay)
+#
+# print(getWinner(myReplay))
 # print (type(replay.game_events[0]) == sc2reader.events.game.CameraEvent)
