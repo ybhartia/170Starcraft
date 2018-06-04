@@ -348,10 +348,10 @@ def getTestHotVectorData(myReplay): # TODO: append team_id instead of Win/Loss
     return data[1:]
 
 
-def getWinner(replay):
+def getWinner(myReplay):
 
     sc2reader.engine.register_plugin(APMTracker())
-    replay = sc2reader.load_replay(replay, load_level=4)
+    replay = sc2reader.load_replay(myReplay, load_level=4)
 
     #Traverse over all players
     for player in replay.people:
