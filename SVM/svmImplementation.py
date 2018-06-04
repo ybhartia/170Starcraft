@@ -15,21 +15,21 @@ def trainReplays(xTrainData, yTrainData):
 	#
 	clfPoly = svm.SVC(kernel='poly', degree=1) # Since input layer should be small
 	clfPoly.fit(xTrainData, yTrainData)
-	joblib.dump(clfPoly, 'clfPoly.pkl')
+	joblib.dump(clfPoly, 'SVM/clfPoly.pkl')
 
 	#
 	# Linear Model
 	#
 	clfLinear = svm.SVC(kernel='linear') 
 	clfLinear.fit(xTrainData, yTrainData)
-	joblib.dump(clfLinear, 'clfLinear.pkl')
+	joblib.dump(clfLinear, 'SVM/clfLinear.pkl')
 
 	#
 	# Sigmoid Model
 	#
 	clfSigmoid = svm.SVC(kernel='sigmoid')
 	clfSigmoid.fit(xTrainData, yTrainData) 
-	joblib.dump(clfSigmoid, 'clfSigmoid.pkl')
+	joblib.dump(clfSigmoid, 'SVM/clfSigmoid.pkl')
 
 
 #
@@ -45,32 +45,32 @@ def pickBestModel(xTestData, yTestData):
 	#
 	# Polynomial model with degree 1
 	#
-	clfPoly = joblib.load('clfPoly.pkl') 
+	clfPoly = joblib.load('SVM/clfPoly.pkl') 
 	score = clfPoly.score(xTestData, xTrainData)
 
 	if(score > bestScore):
 		bestScore = score
-		bestFileName = 'clfPoly.pkl'
+		bestFileName = 'SVM/clfPoly.pkl'
 	
 	#
 	# Linear model
 	#
-	clfLinear = joblib.load('clfLinear.pkl') 
+	clfLinear = joblib.load('SVM/clfLinear.pkl') 
 	score = clfLinear.score(xTestData, xTrainData)
 
 	if(score > bestScore):
 		bestScore = score
-		bestFileName = 'clfLinear.pkl'
+		bestFileName = 'SVM/clfLinear.pkl'
 	
 	#
 	# Sigmoid Model
 	#
-	clfSigmoid = joblib.load('clfSigmoid.pkl') 
+	clfSigmoid = joblib.load('SVM/clfSigmoid.pkl') 
 	score = clfSigmoid.score(xTestData, xTrainData)
 
 	if(score > bestScore):
 		bestScore = score
-		bestFileName = 'clfSigmoid.pkl'
+		bestFileName = 'SVM/clfSigmoid.pkl'
 
 
 	# returns the best score, aka - confidence, and the file name for the best model

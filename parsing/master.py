@@ -8,7 +8,7 @@ from sc2reader.engine.plugins import APMTracker
 #
 
 #Replay location
-myReplay = 'workingReplays/ggtracker_93727.SC2Replay'
+myReplay = 'workingReplays/ggtracker_93731.SC2Replay'
 
 #
 # The player data that is used to initialize the input vectors
@@ -307,10 +307,25 @@ def getPrintData():
 
     data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events)
     data, unitStatusComments = getGameEvents(data, unitStatusComments, players, replay.events)
-    print(data)
-    print(unitStatusComments)
+    # print(data)
+    # print(unitStatusComments)
 
-    return unitStatusComments
+    return unitStatusComments[1:]
+
+def getHotVectorData():
+
+    sc2reader.engine.register_plugin(APMTracker())
+    replay = sc2reader.load_replay(myReplay, load_level=4)
+    data = [[]]
+    unitStatusComments = [[]]
+
+    players = initiatePlayers(replay)
+    # printPlayers(players)
+
+    data, unitStatusComments = getTrackerEvents(data, unitStatusComments,players, replay.tracker_events)
+    data, unitStatusComments = getGameEvents(data, unitStatusComments, players, replay.events)
+
+    return data[1:]
 
 
 getPrintData()

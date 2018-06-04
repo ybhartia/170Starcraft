@@ -18,7 +18,7 @@ def seperateWinner(rawData):
 	for element in rawData:
 
 		if(element[-1] == MACRO_PLAYER_LOST):
-			rawDataLost += [ele
+			rawDataLost += [element]
 		else:
 			rawDataWin += [element]
 
@@ -107,8 +107,8 @@ def callTrainSVM(rawData):
 
 	# remove first element of xTrainData due to initializing with an empty
 	xTrainData = np.array(xTrainData[1:])
-	print xTrainData
-	print yTranData
+	# print xTrainData
+	# print yTranData
 	return xTrainData, yTranData
 
 
@@ -176,22 +176,34 @@ def callTestSVM(rawData):
 	xTrainData = np.array(xTrainData[1:])
 
 	for element in range(0,len(xTrainData)/2):
-		yOut1 += [svm.checkForWin(xTrainData[element], 'clfLinear.pkl')]
+		if(element != 0):
+			yOut1 += [svm.checkForWin(xTrainData[element], 'SVM/clfLinear.pkl') + yOut1[element - 1]]
+		else:
+			yOut1 += [svm.checkForWin(xTrainData[element], 'SVM/clfLinear.pkl')]
 
 	for element in range(len(xTrainData)/2, len(xTrainData)):
-		yOut2 += [svm.checkForWin(xTrainData[element], 'clfLinear.pkl')]
+		if((element - len(xTrainData)/2) != 0):
+			yOut2 += [svm.checkForWin(xTrainData[element], 'SVM/clfLinear.pkl') + yOut2[(element - len(xTrainData)/2) - 1]]
+
+		else:
+			yOut2 += [svm.checkForWin(xTrainData[element], 'SVM/clfLinear.pkl')]
 	
-	# remove first element of xTrainData due to initializing with an empty
-	print yOut1
-	print yOut2
+	# # remove first element of xTrainData due to initializing with an empty
+	# print yOut1
+	# print yOut2
 	return yOut1, yOut2
 
 
+def callTrainReplays(xTrainData, yTraindata):
 
-a = [[1,1,1,1,1,2],[120,2,2,2,2,2],[45,2,2,2,2,2],[2,10,10,10,10,1], [49,10,10,10,10,1],[100,1,1,1,1,2],[101, 12,12,12,12,1]]
-b = [[1,2,2,2,2,1], [100,3,3,3,3,1], [1,11,11,11,11,2],[100,12,12,12,12,2]]
-xTrainData, yTraindata = callTrainSVM(a)
-svm.trainReplays(xTrainData, yTraindata)
+	svm.trainReplays(xTrainData, yTraindata)
 
-yOut1, yOut2 = callTestSVM(b)
+
+
+# a = [[1,1,1,1,1,2],[120,2,2,2,2,2],[45,2,2,2,2,2],[2,10,10,10,10,1], [49,10,10,10,10,1],[100,1,1,1,1,2],[101, 12,12,12,12,1]]
+# b = [[1,2,2,2,2,1], [100,3,3,3,3,1], [1,11,11,11,11,2],[100,12,12,12,12,2]]
+# xTrainData, yTraindata = callTrainSVM(a)
+# svm.trainReplays(xTrainData, yTraindata)
+
+# yOut1, yOut2 = callTestSVM(b)
 
