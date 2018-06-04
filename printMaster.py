@@ -5,8 +5,7 @@ import printDir.printHelper as helper
 import SVM.svmHandler as svmHandler
 
 # commentOnList = [[18, 'Trentos', 'Probe', 'UnitBornEvent'], [19, 'Onion', 'Probe', 'UnitBornEvent'], [35, 'Trentos', 'Probe', 'UnitBornEvent'], [36, 'Onion', 'Probe', 'UnitBornEvent']]
-commentOnList = master.getPrintData()
-hotVectorData = master.getHotVectorData()
+
 
 def comment(simpleEvents):
     timeInSec = 1
@@ -37,6 +36,13 @@ def trainSVM(hotVectorData):
     xTrainData, yTrainData = svmHandler.callTrainSVM(hotVectorData)
     svmHandler.callTrainReplays(xTrainData,yTrainData)
 
+
+#Replay location
+myReplay = 'workingReplays/ggtracker_93731.SC2Replay'
+
+commentOnList = master.getPrintData(myReplay)
+hotTrainVectorData = master.getTrainHotVectorData(myReplay)
+hotTestVectorData = master.getTestHotVectorData(myReplay)
 # comment(commentOnList)
-trainSVM(hotVectorData)
-getSVMResults(hotVectorData)
+trainSVM(hotTrainVectorData)
+getSVMResults(hotTestVectorData)
