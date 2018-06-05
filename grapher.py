@@ -136,18 +136,51 @@ def TestSVM(filename):
     print("According to reality " + parser.getWinner(filename)+ " actually won the game")
     if yOut1[len(yOut1)-1] > yOut2[len(yOut2)-1]:
         print(team1)
+        winner = 1
     else:
         print(team2)
+        winner = 2
 
-DIR_NAME = "workingReplays"
-# TEST_REPLAY = "workingReplays/OneSideDominates.SC2Replay"
-# TEST_REPLAY_TWO = "workingReplays/ggtracker_93731.SC2Replay"
+    if winner == 1:
+        if [parser.getWinner(filename)] in team1:
+            return 1
+    elif winner == 2:
+        if [parser.getWinner(filename)] in team2:
+            return 1
+    else:
+        return 0
+
 
 directoryName = "workingReplays"
 
 
+
+# TRAINING 
+print(" HEY LETS TRAIN LIKE CUNTS")
 testFile = trainSVM(directoryName)
-TestSVM(DIR_NAME + DIR_SEPARATOR + testFile)
-# print(testFile)
-# runProject()
+
+
+# # TESTING ONECE
+# TestSVM(directoryName + DIR_SEPARATOR + testFile)
+
+# TESTING TO GENERATE ACCURACY
+print(" HEY I'M CALCULATING YOUR ACCURACY, GO SMOKE SOME POT")
+success = 0
+attempts = 1
+numReplays = len(listdir(directoryName))
+Replays = listdir(directoryName)
+
+for i in range(0,attempts):
+    filenum = random.randint(0,len(listdir(directoryName)) - 1) 
+    testFile = Replays[filenum]
+    if(testFile[0] != '.'):
+        print(i,directoryName + DIR_SEPARATOR + testFile)
+        result = TestSVM(directoryName + DIR_SEPARATOR + testFile)
+        print(result)
+        if result == 1:
+            success = success + 1 
+
+print(success,"/",attempts)
+accuracy = float(success)/float(attempts)
+print("The predictor's accuracy is ",accuracy)
 
