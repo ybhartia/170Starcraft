@@ -27,20 +27,20 @@ def comment(commentOnList, p1Predictions, p2Predictions, replay):
             timeInSec += .5
         commentLine = getLine(event, replay)
 
-        timeInSec += animate.commentate(commentLine, True, 'm')
+        timeInSec += animate.commentate(str(event[0]/1.4) + ': ' + commentLine, True, 'm')
 
 def getLine(event, replay):
     player = event[1]
     unit = event[2]
     if event[3] == 'UnitBornEvent':
-        return helper.getUnitBornLine(player,unit)
+        return helper.getUnitBornLine(player,unit, event)
     elif event[3] == 'UnitDiedEvent':
-        return helper.getUnitDieLine(player,unit)
+        return helper.getUnitDieLine(player,unit, event)
     elif event[3] == 'UnitTypeChangeEvent':
         faction = parser.getPlayer(player, replay).play_race
-        return helper.getTypeChangeLine(player,unit,faction)
+        return helper.getTypeChangeLine(player,unit,faction, event)
     elif event[3] == 'UpgradeCompleteEvent':
-        return helper.getUpgradeCompleteLine(player,unit, "")
+        return helper.getUpgradeCompleteLine(player,unit, "", event)
     else:
         return player + ' ' + unit + ' ' + event[3]
 
@@ -128,7 +128,10 @@ def runProject(testFile):
     print("Player 1 : ",yOut1)
     print("Player 2 : ", yOut2)
     print("and player", parser.getWinner(testFile), "actually won the game")
-    # comment(commentOnList, yOut1, yOut2, testFile)
+
+    commentOnList = parser.mergeComments(commentOnList)
+    comment(commentOnList, yOut1, yOut2, testFile)
+
 
 
 DIR_NAME = "workingReplays"

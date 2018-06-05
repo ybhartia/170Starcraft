@@ -49,8 +49,8 @@ def getIntroLines():
 # player: string contains the player's name that the unit belong to
 # unit: string contains unit's type being produced
 #
-def getUnitBornLine(player, unit):
-	listOfLines = getUnitBornLines(player, unit)
+def getUnitBornLine(player, unit, event):
+	listOfLines = getUnitBornLines(player, unit, event)
 	line = pickRandom(listOfLines)
 	return line
 
@@ -62,12 +62,20 @@ def getUnitBornLine(player, unit):
 # player: string contains the player's name that the unit belong to
 # unit: string contains unit's type being produced
 #
-def getUnitBornLines(player, unit):
-	lines = []
-	lines += [ player + "'s " + unit + " is ready to go." ]
-	lines += [ unit + "'s production is completed for " + player + "." ]
-	lines += [ "What will " + player + " do with that new " + unit + "?"]
-	lines += [ "Hey " + player + " your " + unit + " is here!"]
+def getUnitBornLines(player, unit, event):
+	# more than one unit made togther
+	if(len(event) > 4):
+		event[4] = str(event[4])
+		lines = []
+		lines += [ player + "'s " + event[4] + " " + unit + "s are ready to go." ]
+		lines += [ "The production of " + event[4] +" "+ unit + "s is completed for " + player + "." ]
+		lines += [ "What will " + player + " do with " + event[4] + " new " + unit + "s?"]
+	else:
+		lines = []
+		lines += [ player + "'s " + unit + " is ready to go." ]
+		lines += [ unit + "'s production is completed for " + player + "." ]
+		lines += [ "What will " + player + " do with that new " + unit + "?"]
+		lines += [ "Hey " + player + " your " + unit + " is here!"]
 	return lines
 
 
@@ -79,8 +87,8 @@ def getUnitBornLines(player, unit):
 # player: string contains the player's name that the unit belong to
 # unit: string contains unit's type being produced
 #
-def getUnitDieLine(player, unit):
-	listOfLines = getUnitDieLines(player, unit)
+def getUnitDieLine(player, unit, event):
+	listOfLines = getUnitDieLines(player, unit, event)
 	line = pickRandom(listOfLines)
 	return line
 
@@ -91,31 +99,47 @@ def getUnitDieLine(player, unit):
 # player: string contains the player's name that the unit belong to
 # unit: string contains unit's type being produced
 #
-def getUnitDieLines(player, unit):
-	lines = []
-	lines += [ player + "'s " + unit + " has been destroyed!"]
-	lines += [ player + " has lost " + add_a_or_an(unit, False) + "." ]
-	lines += [ add_a_or_an(unit, True) + " has died, " + player + " should get a new one."]
-	lines += [ player + " doesn't take a good care of that " + unit + ". It's dead."]
+def getUnitDieLines(player, unit, event):
+	if(len(event) > 4):
+		num = str(event[4])
+		lines = []
+		lines += [ player + "'s " + num + makePlural(unit)+ " have been destroyed!"]
+		lines += [ player + " has lost " + num + makePlural(unit) + "." ]
+		lines += [ num + makePlural(unit) + " have died, " + player + " should get new ones."]
+		lines += [ player + " doesn't take a good care of those " + num + makePlural(unit) + ". They're dead."]
+	else:
+		lines = []
+		lines += [ player + "'s " + unit + " has been destroyed!"]
+		lines += [ player + " has lost " + add_a_or_an(unit, False) + "." ]
+		lines += [ add_a_or_an(unit, True) + " has died, " + player + " should get a new one."]
+		lines += [ player + " doesn't take a good care of that " + unit + ". It's dead."]
 	return lines
 
-def getUpgradeCompleteLine(player, upgrade, unit):
-	listOfLines = getUpgradeCompleteLines(player, upgrade, unit)
+def getUpgradeCompleteLine(player, upgrade, unit, event):
+	listOfLines = getUpgradeCompleteLines(player, upgrade, unit, event)
 	line = pickRandom(listOfLines)
 	return line
 
-def getUpgradeCompleteLines(player, upgrade, unit):
-	lines = []
-	lines += [ upgrade + " upgrade completed for " + player + "." ]
-	lines += [ upgrade + " upgrade is done. More power to " + player + "."]
-	lines += [ player + " now has " + upgrade + "." ]
+def getUpgradeCompleteLines(player, upgrade, unit, event):
+
+	if(len(event) > 4):
+		num = str(event[4])
+		lines = []
+		lines += [ num + makePlural(upgrade) + " upgrades completed for " + player + "." ]
+		lines += [ num + makePlural(upgrade) + " upgrades are done. More power to " + player + "!"]
+		lines += [ player + " now has " + num + makePlural(upgrade) + "." ]
+	else:
+		lines = []
+		lines += [ upgrade + " upgrade completed for " + player + "." ]
+		lines += [ upgrade + " upgrade is done. More power to " + player + "."]
+		lines += [ player + " now has " + upgrade + "." ]
 	if unit != "":
 		lines += [ player + "'s " + unit + "'s power has been increased." ]
 	return lines
 
 
 
-def getTypeChangeLine(player, unit, faction):
+def getTypeChangeLine(player, unit, faction, event):
 	listOfLines = getTypeChangeLines(player, unit, faction)
 	line = pickRandom(listOfLines)
 	return line
@@ -158,6 +182,14 @@ def add_a_or_an(noun, cap):
 		return ("An " if cap else 'an ') + noun
 	else:
 		return ("A " if cap else 'a ') + noun
+
+#
+# make unit plural
+#
+# @cap is a boolean, indicating capitalization
+#
+def makePlural(noun):
+	return " " + noun + "s"
 
 #
 # Check if unit should be ignore (if it dies or borns)

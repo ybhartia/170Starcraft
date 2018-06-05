@@ -403,6 +403,34 @@ def getAllPlayers(myReplay):
 
     return replay.people
 
+#
+# Merges comments with same data
+#
+def mergeComments(comments):
+
+    # Going through all the comments and merging
+    for index, comment in enumerate(comments):
+
+        # if content of two comments is similar
+        if (index < len(comments) - 1 and comment[1:4] == comments[index + 1][1:4]) :
+
+            # if one merge already occured
+            if(len(comments[index + 1]) > 4):
+                comments[index + 1][4] += 1
+            else:
+                # if prevoius comment was also a merge
+                if(len(comments[index]) > 4):
+                    comments[index + 1] = comments[index + 1] + [1 + comments[index][4]]
+                else :
+                    comments[index + 1] = comments[index + 1] + [2]
+            comments[index] = []
+
+    # removing the useless empty comments
+    comments = filter(lambda a: a != [], comments)
+
+    return comments
+
+
 
 #Replay location
 myReplay = 'workingReplays/OneSideDominates.SC2Replay'
