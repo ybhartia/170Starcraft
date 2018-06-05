@@ -205,6 +205,22 @@ def getUpdateTargetUnitCommandEvent(players, event, testOrTrain):
     return vec, comment
 
 
+def getCameraEvent(players, event, testOrTrain):
+
+    # Get timestamp in seconds for the array
+    timestamp = str(event.second).split()[0]
+    name = str(event).split()[1]
+
+    bot = str(event).split("CameraEvent at (")[1].split(',')[0]
+
+    # Create the vector for the data table
+    vec = initiateDataVector(players[getplayerNumber(name,players)], testOrTrain )
+    vec[0] = int(timestamp)
+
+    comment = [int(timestamp), name, bot, "UpdateTargetUnitCommandEvent"]
+    return vec, comment
+
+
 
 #
 # This function recieves the trackerEvents subtrack 
@@ -258,6 +274,7 @@ def getTrackerEvents(data, comments, players, trackerEvents, testOrTrain):
 #
 def getGameEvents(data, comments, players, Events, testOrTrain):
     # Get type of the trackerEvent
+
     for event in Events:
         myEvent = str(type(event)).split('\'')[1].split('.')[3]
         #print(myEvent)
@@ -271,6 +288,11 @@ def getGameEvents(data, comments, players, Events, testOrTrain):
         elif myEvent == "UpdateTargetUnitCommandEvent":
             if len(str(event).split()) > 8:
                 tempData, tempComments = getUpdateTargetUnitCommandEvent(players, event, testOrTrain)
+                comments.append(tempComments)
+                data.append(tempData)
+
+        elif myEvent == "CameraEvent":
+                tempData, tempComments = getCameraEvent(players, event, testOrTrain)
                 comments.append(tempComments)
                 data.append(tempData)
 
