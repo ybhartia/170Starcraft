@@ -57,7 +57,7 @@ def commentate(inputString, newLine, speed):
 
     # with medium animation, each new character is printed every 8 milliseconds
     elif speed == "medium" or speed == "m":
-        frequency = 0.08
+        frequency = 0.035
 
     # with slow animation, each new character is printed every 12 milliseconds
     elif speed == "slow" or speed == "s":
