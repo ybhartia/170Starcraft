@@ -9,6 +9,16 @@ MACRO_PLAYER_TWO = 1
 # function that seperates the team who won or lost
 #
 def seperateWinner(rawData):
+
+	i = 0
+	length = len(rawData)
+	while( i < length):
+		if rawData[i] == "":
+			del rawData[i]
+			length -= 1
+		else:
+			i+=1
+
 	# converting in an np array
 	rawData = np.array(rawData)
 	rawData = rawData[np.argsort(rawData[:,0])]
