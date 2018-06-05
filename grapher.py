@@ -156,8 +156,8 @@ directoryName = "workingReplays"
 
 
 # TRAINING 
-print(" HEY LETS TRAIN LIKE CUNTS")
-testFile = trainSVM(directoryName)
+# print(" HEY LETS TRAIN LIKE CUNTS")
+# testFile = trainSVM(directoryName)
 
 
 # # TESTING ONECE
@@ -169,14 +169,22 @@ success = 0
 attempts = 20
 numReplays = len(listdir(directoryName))
 Replays = listdir(directoryName)
-
-for i in range(0,attempts):
-    filenum = random.randint(0,len(listdir(directoryName)) - 1) 
+Replays = sorted(Replays)
+counter = 0
+for replay in Replays:
+    print counter, replay
+    counter = counter + 1
+for i in range(0,numReplays):
+    filenum = i
     testFile = Replays[filenum]
     if(testFile[0] != '.'):
-        # print(i,directoryName + DIR_SEPARATOR + testFile)
+        print(i,directoryName + DIR_SEPARATOR + testFile)
+        hotVectorData = parser.getTrainHotVectorData(directoryName + DIR_SEPARATOR + testFile)
+        xTempTrainData, yTempTrainData = svmHandler.callTrainSVM(hotVectorData)
+
         result = TestSVM(directoryName + DIR_SEPARATOR + testFile)
-        # print(result)
+       
+        print(result)
         if result == 1:
             success = success + 1 
 
