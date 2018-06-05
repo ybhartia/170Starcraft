@@ -108,31 +108,26 @@ def trainSVM(directoryName):
     svmHandler.callTrainReplays(xTrainData[1:], yTrainData)
     return testFile
 
-def TestSVM(filename):
-    commentOnList = parser.getPrintData(filename)
-    hotVectorData = parser.getTestHotVectorData(filename)
-    yOut1,yOut2 = svmHandler.callTestSVM(hotVectorData)
-    print("Player 1 : ",yOut1)
-    print("Player 2 : ", yOut2)
-    print("According to us " + parser.getWinner(filename)+ " actually won the game")
-    if yOut1[len(yOut1)-1] > yOut1[len(yOut1)-1]
-    # comment(commentOnList, yOut1, yOut2)
-
 
 #
 #
 #.MAIN FUNCTION THAT IS GOING TO DO EVERYTHING
 #
 #
-def runProject():
-    commentOnList = parser.getPrintData(TEST_REPLAY)
-    hotVectorData = parser.getTestHotVectorData(TEST_REPLAY)
+def runProject(testFile):
+
+    #
+    commentOnList = parser.getPrintData(testFile)
+    hotVectorData = parser.getTestHotVectorData(testFile)
+
+    print len(commentOnList)
+    print len(hotVectorData)
     print hotVectorData
     yOut1,yOut2 = svmHandler.callTestSVM(hotVectorData)
     print("Player 1 : ",yOut1)
     print("Player 2 : ", yOut2)
-    print("and player", parser.getWinner(TEST_REPLAY), "actually won the game")
-    comment(commentOnList, yOut1, yOut2)
+    print("and player", parser.getWinner(testFile), "actually won the game")
+    # comment(commentOnList, yOut1, yOut2)
 
 
 DIR_NAME = "workingReplays"
@@ -143,7 +138,8 @@ directoryName = "workingReplays"
 
 
 testFile = trainSVM(directoryName)
-TestSVM(DIR_NAME + DIR_SEPARATOR + testFile)
+runProject(DIR_NAME + DIR_SEPARATOR + testFile)
+# TestSVM(DIR_NAME + DIR_SEPARATOR + testFile)
 # print(testFile)
 # runProject()
 

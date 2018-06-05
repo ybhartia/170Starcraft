@@ -392,6 +392,18 @@ def getPlayer(name,myReplay):
             return player
 
     return -1
+
+#
+# Fetches all the players from the replays
+#
+def getAllPlayers(myReplay)
+
+    sc2reader.engine.register_plugin(APMTracker())
+    replay = sc2reader.load_replay(myReplay, load_level=4)
+
+    return replay.people
+    
+
 #Replay location
 myReplay = 'workingReplays/OneSideDominates.SC2Replay'
 a = getTrainHotVectorData(myReplay)

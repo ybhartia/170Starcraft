@@ -176,9 +176,12 @@ def shouldIgnore(unit):
 # print getTypeChangeLine("Hung", "Banneling", "Zergling", "Zerg", False)
 # print getUpgradeCompleteLine("Hung", "Zerg Attact Increase", "Zergling")
 def getHumans(numHumans):
-	if humans > 0:
+	if humans == 1:
+		return "1 human"
+	elif humans > 1:
 		return str(numHumans) + " humans"
 	return ""
+
 
 def getAI(numAI):
 	if numAI > 0:
@@ -209,7 +212,7 @@ def callTeamIntro(players):
 			if player.is_human:
 				team1Humans += 1
 		else:
-			team2.append(player.name):
+			team2.append(player.name)
 			if player.is_human:
 				team2Humans += 1
 
