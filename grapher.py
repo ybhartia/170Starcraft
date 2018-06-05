@@ -166,7 +166,7 @@ testFile = trainSVM(directoryName)
 # TESTING TO GENERATE ACCURACY
 print(" HEY I'M CALCULATING YOUR ACCURACY, GO SMOKE SOME POT")
 success = 0
-attempts = 1
+attempts = 20
 numReplays = len(listdir(directoryName))
 Replays = listdir(directoryName)
 
