@@ -175,11 +175,11 @@ def shouldIgnore(unit):
 
 # print getTypeChangeLine("Hung", "Banneling", "Zergling", "Zerg", False)
 # print getUpgradeCompleteLine("Hung", "Zerg Attact Increase", "Zergling")
-def getHumans(numHumans):
+def getHumans(humans):
 	if humans == 1:
 		return "1 human"
 	elif humans > 1:
-		return str(numHumans) + " humans"
+		return str(humans) + " humans"
 	return ""
 
 
@@ -190,7 +190,7 @@ def getAI(numAI):
 # Commentate on human or not as well as number of players and races 
 # team_id and is_human
 # #
-def callTeamIntro(players):
+def getTeamIntro(players):
 
 	# will hold the number of players on each team
 	playersOnEachTeam = len(players)/2
@@ -226,7 +226,10 @@ def callTeamIntro(players):
 		matchup2 += ", " + team2[i]
 
 	teamIntro += ["We're gonna see " + matchup1 + " VS " + matchup2 + "!"] 
-	return teamIntro
+
+	strteamIntro = '\n'.join(teamIntro)
+	print strteamIntro
+	return strteamIntro
 
 
 

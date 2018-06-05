@@ -8,25 +8,28 @@ import os
 import random
 
 DIR_SEPARATOR = '/'
+DIR_TEST = "HungsReplayTvZ.SC2Replay"
 # commentOnList = [[18, 'Trentos', 'Probe', 'UnitBornEvent'], [19, 'Onion', 'Probe', 'UnitBornEvent'], [35, 'Trentos', 'Probe', 'UnitBornEvent'], [36, 'Onion', 'Probe', 'UnitBornEvent']]
 
 
 #
 # Comment given events and player predictions
 #
-def comment(commentOnList, p1Predictions, p2Predictions):
+def comment(commentOnList, p1Predictions, p2Predictions, replay):
+
     timeInSec = animate.commentate(helper.getIntro(), True, 'm')
+    timeInSec += animate.commentate(helper.getTeamIntro(parser.getAllPlayers(replay)), True, 'm')
     for event in commentOnList:
         if(event == ""):
             continue
-        while (timeInSec < event[0]):
+        while (timeInSec < (event[0]/1.4)):
             animate.moveOn(.5)
             timeInSec += .5
-        commentLine = getLine(event)
+        commentLine = getLine(event, replay)
 
         timeInSec += animate.commentate(commentLine, True, 'm')
 
-def getLine(event):
+def getLine(event, replay):
     player = event[1]
     unit = event[2]
     if event[3] == 'UnitBornEvent':
@@ -34,7 +37,7 @@ def getLine(event):
     elif event[3] == 'UnitDiedEvent':
         return helper.getUnitDieLine(player,unit)
     elif event[3] == 'UnitTypeChangeEvent':
-        faction = parser.getPlayer(player, TEST_REPLAY).play_race
+        faction = parser.getPlayer(player, replay).play_race
         return helper.getTypeChangeLine(player,unit,faction)
     elif event[3] == 'UpgradeCompleteEvent':
         return helper.getUpgradeCompleteLine(player,unit, "")
@@ -84,6 +87,7 @@ def trainSVM(directoryName):
     yTrainData = []
 
     testFile = listdir(directoryName)[random.randint(1,len(listdir(directoryName))-1 ) ]
+    testFile = DIR_TEST
 
 
     # going through the directory
@@ -120,14 +124,11 @@ def runProject(testFile):
     commentOnList = parser.getPrintData(testFile)
     hotVectorData = parser.getTestHotVectorData(testFile)
 
-    print len(commentOnList)
-    print len(hotVectorData)
-    print hotVectorData
     yOut1,yOut2 = svmHandler.callTestSVM(hotVectorData)
     print("Player 1 : ",yOut1)
     print("Player 2 : ", yOut2)
     print("and player", parser.getWinner(testFile), "actually won the game")
-    # comment(commentOnList, yOut1, yOut2)
+    # comment(commentOnList, yOut1, yOut2, testFile)
 
 
 DIR_NAME = "workingReplays"

@@ -1,9 +1,10 @@
 import numpy as np
 import svmImplementation as svm
 MACRO_TIME_GAP = 1.4
-MACRO_PLAYER_WON = 2
-MACRO_PLAYER_LOST = 1
-
+MACRO_PLAYER_WON = 1
+MACRO_PLAYER_LOST = 0
+MACRO_PLAYER_ONE = 2
+MACRO_PLAYER_TWO = 1
 #
 # function that seperates the team who won or lost
 #
@@ -30,6 +31,31 @@ def seperateWinner(rawData):
 
 	return rawDataWin, rawDataLost
 
+#
+# function that seperates the team who won or lost
+#
+def seperatePlayer(rawData):
+	# converting in an np array
+	rawData = np.array(rawData)
+	rawData = rawData[np.argsort(rawData[:,0])]
+
+	rawData1 = [[]]
+	rawData2 = [[]]
+
+	for element in rawData:
+
+		if(element[-1] == MACRO_PLAYER_ONE):
+			rawData1 += [element]
+		else:
+			rawData2 += [element]
+
+	# getting the classification
+	rawData1 = np.array(rawData1[1:])
+	rawData2 = np.array(rawData2[1:])
+	rawData1 = rawDataWin[:,:-1]
+	rawData2 = rawDataLost[:,:-1]
+
+	return rawData1, rawData2
 
 
 #
@@ -118,7 +144,7 @@ def callTrainSVM(rawData):
 #
 def callTestSVM(rawData):
 
-	rawData1, rawData2 = seperateWinner(rawData)
+	rawData1, rawData2 = seperatePlayer(rawData)
 
 	# retrieve winning and losing data
 	xTrainData = [[]]

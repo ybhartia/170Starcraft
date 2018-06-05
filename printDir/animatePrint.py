@@ -33,9 +33,7 @@ def commentate(inputString, newLine, speed):
 
     # making sure all inputs are valid
     start = time.time()
-    # inputString needs to be a string
-    if type(inputString) != str:
-        raise Exception("Argument 1 string expected")
+
 
     #newLine needs to be a bool
     if type(newLine) != bool:
