@@ -120,10 +120,7 @@ def getUnitBornEvent(players, tracker, testOrTrain):
     timestamp = str(tracker.second).split()[0]
     name = str(tracker).split()[4]
 
-    if(name == "A.I."):
-        bot = str(tracker).split()[11]
-    else:
-        bot = str(tracker).split()[9]
+    bot = str(tracker).split("born")[1].split()[0]
 
     # Create the vector for the data table
     vec = initiateDataVector(players[getplayerNumber(name,players)], testOrTrain)
@@ -143,10 +140,7 @@ def getUnitDiedEvent(players, tracker, testOrTrain):
     timestamp = str(tracker.second).split()[0]
     name = str(tracker).split()[4]
 
-    if(name == "A.I."):
-        bot = str(tracker).split()[11]
-    else:
-        bot = str(tracker).split()[9]
+    bot = str(tracker).split("died")[1].split()[0]
 
     # Create the vector for the data table
     vec = initiateDataVector(players[getplayerNumber(name,players)], testOrTrain)
@@ -165,13 +159,7 @@ def getUnitTypeChangeEvent(players, tracker, testOrTrain):
     # Get timestamp in seconds for the array
     timestamp = str(tracker.second).split()[0]
     name = str(tracker).split()[4]
-    bot = str(tracker).split()[16]
-
-    if(name == "A.I."):
-        bot = str(tracker).split()[20]
-    else:
-        bot = str(tracker).split()[16]
-
+    bot = str(tracker).split("type changed to")[1].split()[0]
     # Create the vector for the data table
     vec = initiateDataVector(players[getplayerNumber(name,players)], testOrTrain)
     vec[0] = int(timestamp)
@@ -190,10 +178,7 @@ def getUpgradeCompleteEvent(players, tracker, testOrTrain):
     timestamp = str(tracker.second).split()[0]
     name = str(tracker).split()[4]
 
-    if(name == "A.I."):
-        bot = str(tracker).split()[9]
-    else:
-        bot = str(tracker).split()[7]
+    bot = str(tracker).split("upgrade")[0].split()[len(str(tracker).split("upgrade")[0].split()) - 1]
 
     # Create the vector for the data table
     vec = initiateDataVector(players[getplayerNumber(name,players)], testOrTrain)
@@ -209,10 +194,7 @@ def getUpdateTargetUnitCommandEvent(players, event, testOrTrain):
     timestamp = str(event.second).split()[0]
     name = str(event).split()[1]
 
-    if(name == "A.I."):
-        bot = str(event).split()[9]
-    else:
-        bot = str(event).split()[5]
+    bot = str(event).split("Target:")[1].split()[0]
 
     # Create the vector for the data table
     vec = initiateDataVector(players[getplayerNumber(name,players)], testOrTrain )
@@ -256,6 +238,7 @@ def getTrackerEvents(data, comments, players, trackerEvents, testOrTrain):
 
         # Checks if the trackerEvent was a unitTypeChangeEvent
         elif (myEvent == "UnitTypeChangeEvent"):
+            
             if len(str(tracker).split()) > 9:
                 tempData, tempComments = getUnitTypeChangeEvent(players, tracker, testOrTrain)
 
@@ -369,9 +352,36 @@ def getWinner(myReplay):
     # Returns -1 if none of the players won
     return -1
 
+
+# 
+# Fetches which indici the player with the name is in the players array
+#
+def getPlayer(name,myReplay):
+
+    sc2reader.engine.register_plugin(APMTracker())
+    replay = sc2reader.load_replay(myReplay, load_level=4)
+
+    for player in replay.people:
+
+        temp = str(player).split()
+        playerName = temp[3]
+        
+        if name == playerName:
+            return player
+
+    return -1
 #Replay location
-# myReplay = 'workingReplays/OneSideDominates.SC2Replay'
-# a = getTrainHotVectorData(myReplay)
-# #
+myReplay = 'workingReplays/OneSideDominates.SC2Replay'
+a = getTrainHotVectorData(myReplay)
+b = getPrintData(myReplay)
+#
 # print(getWinner(myReplay))
 # print (type(replay.game_events[0]) == sc2reader.events.game.CameraEvent)
+
+# b = getPrintData(myReplay)
+# for elem in b:
+#     print(elem)
+# history = []
+
+# for i in b:
+#     history = Comment(history, i)
