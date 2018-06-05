@@ -131,14 +131,14 @@ def TestSVM(filename):
         else:
             team2.append([player.playerName])
 
-    print("Player 1 : ",yOut1, yOut1[len(yOut1)-1])
-    print("Player 2 : ", yOut2, yOut2[len(yOut2)-1])
-    print("According to reality " + parser.getWinner(filename)+ " actually won the game")
+    # print("Player 1 : ",yOut1, yOut1[len(yOut1)-1])
+    # print("Player 2 : ", yOut2, yOut2[len(yOut2)-1])
+    # print("According to reality " + parser.getWinner(filename)+ " actually won the game")
     if yOut1[len(yOut1)-1] > yOut2[len(yOut2)-1]:
-        print(team1)
+        # print(team1)
         winner = 1
     else:
-        print(team2)
+        # print(team2)
         winner = 2
 
     if winner == 1:
@@ -174,13 +174,14 @@ for i in range(0,attempts):
     filenum = random.randint(0,len(listdir(directoryName)) - 1) 
     testFile = Replays[filenum]
     if(testFile[0] != '.'):
-        print(i,directoryName + DIR_SEPARATOR + testFile)
+        # print(i,directoryName + DIR_SEPARATOR + testFile)
         result = TestSVM(directoryName + DIR_SEPARATOR + testFile)
-        print(result)
+        # print(result)
         if result == 1:
             success = success + 1 
 
-print(success,"/",attempts)
-accuracy = float(success)/float(attempts)
-print("The predictor's accuracy is ",accuracy)
+        accuracy = float(success)/float(i+1)
+        print i, accuracy
+
+        
 

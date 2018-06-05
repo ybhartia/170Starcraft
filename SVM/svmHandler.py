@@ -225,8 +225,7 @@ def callTestSVM(rawData):
 			yOut2 += [svm.checkForWin(xTrainData[element], 'SVM/clfLinear.pkl')]
 	
 	# # remove first element of xTrainData due to initializing with an empty
-	# print yOut1
-	# print yOut2
+
 	return yOut1, yOut2
 
 
