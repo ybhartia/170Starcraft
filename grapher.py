@@ -114,6 +114,7 @@ def trainSVM(directoryName):
 def TestSVM(filename):
     commentOnList = parser.getPrintData(filename)
     hotVectorData = parser.getTestHotVectorData(filename)
+    
     yOut1,yOut2 = svmHandler.callTestSVM(hotVectorData)
     
     sc2reader.engine.register_plugin(APMTracker())
@@ -132,7 +133,7 @@ def TestSVM(filename):
 
     print("Player 1 : ",yOut1, yOut1[len(yOut1)-1])
     print("Player 2 : ", yOut2, yOut2[len(yOut2)-1])
-    print("According to us " + parser.getWinner(filename)+ " actually won the game")
+    print("According to reality " + parser.getWinner(filename)+ " actually won the game")
     if yOut1[len(yOut1)-1] > yOut2[len(yOut2)-1]:
         print(team1)
     else:

@@ -55,7 +55,7 @@ def seperatePlayer(rawData):
 	rawData1 = rawData1[:,:-1]
 	rawData2 = rawData2[:,:-1]
 
-	return rawData1, rawData2
+	return rawData2, rawData1
 
 
 #
