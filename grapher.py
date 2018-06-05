@@ -111,11 +111,84 @@ def trainSVM(directoryName):
     svmHandler.callTrainReplays(xTrainData[1:], yTrainData)
     return testFile
 
-def TestSVM(filename):
+def TestSVMLinear(filename):
     commentOnList = parser.getPrintData(filename)
     hotVectorData = parser.getTestHotVectorData(filename)
     
-    yOut1,yOut2 = svmHandler.callTestSVM(hotVectorData)
+    yOut1,yOut2 = svmHandler.callTestSVMLinear(hotVectorData)
+    
+    sc2reader.engine.register_plugin(APMTracker())
+    replay = sc2reader.load_replay(filename, load_level=4)
+
+    players = parser.initiatePlayers(replay)
+
+    team1 = []
+    team2 = []
+
+    for player in players:
+        if player.teamid == 1:
+            team1.append([player.playerName])
+        else:
+            team2.append([player.playerName])
+
+    # print("Player 1 : ",yOut1, yOut1[len(yOut1)-1])
+    # print("Player 2 : ", yOut2, yOut2[len(yOut2)-1])
+    # print("According to reality " + parser.getWinner(filename)+ " actually won the game")
+    if yOut1[len(yOut1)-1] > yOut2[len(yOut2)-1]:
+        # print(team1)
+        winner = 1
+    else:
+        # print(team2)
+        winner = 2
+
+    if winner == 1:
+        if [parser.getWinner(filename)] in team1:
+            return 1
+    elif winner == 2:
+        if [parser.getWinner(filename)] in team2:
+            return 1
+    else:
+        return 0
+
+def TestSVMPoly(filename):
+    commentOnList = parser.getPrintData(filename)
+    hotVectorData = parser.getTestHotVectorData(filename)
+    
+    yOut1,yOut2 = svmHandler.callTestSVMPoly(hotVectorData)
+    
+    sc2reader.engine.register_plugin(APMTracker())
+    replay = sc2reader.load_replay(filename, load_level=4)
+
+    players = parser.initiatePlayers(replay)
+
+    team1 = []
+    team2 = []
+
+    for player in players:
+        if player.teamid == 1:
+            team1.append([player.playerName])
+        else:
+            team2.append([player.playerName])
+
+    if yOut1[len(yOut1)-1] > yOut2[len(yOut2)-1]:
+        winner = 1
+    else:
+        winner = 2
+
+    if winner == 1:
+        if [parser.getWinner(filename)] in team1:
+            return 1
+    elif winner == 2:
+        if [parser.getWinner(filename)] in team2:
+            return 1
+    else:
+        return 0
+
+def TestSVMSigmoid(filename):
+    commentOnList = parser.getPrintData(filename)
+    hotVectorData = parser.getTestHotVectorData(filename)
+    
+    yOut1,yOut2 = svmHandler.callTestSVMSigmoid(hotVectorData)
     
     sc2reader.engine.register_plugin(APMTracker())
     replay = sc2reader.load_replay(filename, load_level=4)
@@ -154,6 +227,42 @@ def TestSVM(filename):
 directoryName = "workingReplays"
 
 
+def TESTall(testingFiles, directoryName):
+
+    successLinear = 0.0
+    successSigmoid = 0.0
+    successPoly = 0.0
+
+    accuracyLinear = 0.0
+    accuracySigmoid = 0.0
+    accuracyPoly = 0.0
+
+
+    for testFile in testingFiles:
+        if(testFile[0] != '.'):
+            print(directoryName + DIR_SEPARATOR + testFile)
+            
+            resultLinear = TestSVMLinear(directoryName + DIR_SEPARATOR + testFile)
+            resultSigmoid = TestSVMSigmoid(directoryName + DIR_SEPARATOR + testFile)
+            resultPoly = TestSVMPoly(directoryName + DIR_SEPARATOR + testFile)
+                    
+            if resultLinear == 1:
+                successLinear = successLinear + 1 
+            if resultPoly == 1:
+                successPoly = successPoly + 1 
+            if resultSigmoid == 1:
+                successSigmoid = successSigmoid + 1 
+
+
+    accuracyLinear = successLinear / len(testingFiles)
+    accuracySigmoid = successSigmoid / len(testingFiles)
+    accuracyPoly = successPoly / len(testingFiles)
+    
+    print "Linear",accuracyLinear
+    print "Poly",accuracyPoly           
+    print "Sigmoid",accuracyLinear
+
+numReplays = len(listdir(directoryName))
 
 # TRAINING 
 # print(" HEY LETS TRAIN LIKE CUNTS")
@@ -174,22 +283,9 @@ counter = 0
 for replay in Replays:
     print counter, replay
     counter = counter + 1
-for i in range(0,numReplays):
-    filenum = i
-    testFile = Replays[filenum]
-    if(testFile[0] != '.'):
-        print(i,directoryName + DIR_SEPARATOR + testFile)
-        hotVectorData = parser.getTrainHotVectorData(directoryName + DIR_SEPARATOR + testFile)
-        xTempTrainData, yTempTrainData = svmHandler.callTrainSVM(hotVectorData)
 
-        result = TestSVM(directoryName + DIR_SEPARATOR + testFile)
-       
-        print(result)
-        if result == 1:
-            success = success + 1 
+testReplays = Replays[len(Replays) - 10:]
 
-        accuracy = float(success)/float(i+1)
-        print i, accuracy
-
-        
+print testReplays
+TESTall(testReplays, directoryName)
 
