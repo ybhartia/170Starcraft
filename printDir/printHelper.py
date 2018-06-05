@@ -175,34 +175,58 @@ def shouldIgnore(unit):
 
 # print getTypeChangeLine("Hung", "Banneling", "Zergling", "Zerg", False)
 # print getUpgradeCompleteLine("Hung", "Zerg Attact Increase", "Zergling")
+def getHumans(numHumans):
+	if humans > 0:
+		return str(numHumans) + " humans"
+	return ""
 
-
+def getAI(numAI):
+	if numAI > 0:
+		return " and " + str(numAI) + " AI"
+	return ""
 # Commentate on human or not as well as number of players and races 
 # team_id and is_human
 # #
-# def callTeamIntro(players):
-#
-# 	# will hold the number of players on each team
-# 	playersOnEachTeam = len(players)/2
-#
-# 	# will hold number of humans
-# 	humans = 0
-# 	tempTeamId = 1
-#
-# 	# going through list of players
-# 	for player in players:
-#
-# 		# checking if this team has humans
-# 		if(player.team_id == tempTeamId and player.is_human == True):
-# 			humans += 1
-# 			tempTeamId += 1
-#
-# 	if(humans == 0):
-# 		continue # call cpuVcpu
-# 	elif(humasn  == 1):
-# 		continue # call userVcpu
-# 	else:
-# 		continue # call userVuse
+def callTeamIntro(players):
+
+	# will hold the number of players on each team
+	playersOnEachTeam = len(players)/2
+
+	# will hold number of humans
+
+	team1AI = 0
+	team2AI = 0
+	team1Humans = 0
+	team2Humans = 0
+	team1 = []
+	team2 = []
+
+	# going through list of players
+	for player in players:
+		# separating players into teams and also getting data of number of humans and ai on each team
+		if player.team_id == 1:
+			team1.append(player.name)
+			if player.is_human:
+				team1Humans += 1
+		else:
+			team2.append(player.name):
+			if player.is_human:
+				team2Humans += 1
+
+	teamIntro = []
+	teamIntro += ["It's gonna be an interesting match with " + getHumans(team1Humans) +  getAI(team1AI) + " on Team 1 against " 
+	+ getHumans(team1Humans) +  getAI(team1AI) + " on Team 2!"]
+	matchup1 = team1[0]
+	matchup2 = team2[0]
+	for i in range(1,len(team1)):
+		matchup1 += ", " + team1[i]
+		matchup2 += ", " + team2[i]
+
+	teamIntro += ["We're gonna see " + matchup1 + " VS " + matchup2 + "!"] 
+	return teamIntro
+
+
+
 
 
 		
