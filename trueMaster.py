@@ -10,26 +10,37 @@ from os import listdir
 DIR_NAME = "workingReplays"
 DIR_SEPARATOR = '/'
 TEST_REPLAY = "workingReplays/OneSideDominates.SC2Replay"
+TEST_REPLAY_TWO = "workingReplays/ggtracker_93731.SC2Replay"
 
 #
+# Comment given events and player predictions
 #
-#
-def comment(simpleEvents):
-    timeInSec = 1
+def comment(commentOnList, p1Predictions, p2Predictions):
+    timeInSec = animate.commentate(helper.getIntro(), True, 'm')
     for event in commentOnList:
         if(event == ""):
             continue
-        while (timeInSec < event[0]/ 1000):
+        while (timeInSec < event[0]):
             animate.moveOn(.5)
             timeInSec += .5
         commentLine = getLine(event)
-        timeInSec += animate.commentate(commentLine, True, 'f')
+
+        timeInSec += animate.commentate(commentLine, True, 'm')
 
 def getLine(event):
+    player = event[1]
+    unit = event[2]
     if event[3] == 'UnitBornEvent':
-        return helper.getUnitBornLine(event[1],event[2])
+        return helper.getUnitBornLine(player,unit)
+    elif event[3] == 'UnitDiedEvent':
+        return helper.getUnitDieLine(player,unit)
+    elif event[3] == 'UnitTypeChangeEvent':
+        faction = parser.getPlayer(player, TEST_REPLAY).play_race
+        return helper.getTypeChangeLine(player,unit,faction)
+    elif event[3] == 'UpgradeCompleteEvent':
+        return helper.getUpgradeCompleteLine(player,unit, "")
     else:
-        return event[1] + ' ' + event[2] + ' ' + event[3]
+        return player + ' ' + unit + ' ' + event[3]
 
 
 
@@ -50,9 +61,10 @@ def trainSVM():
         filename = DIR_NAME + DIR_SEPARATOR + filename
 
         # Not training with the test replay
-        if(filename != TEST_REPLAY) and filename[len(DIR_NAME) + len(DIR_SEPARATOR)] != '.' and filename == 'workingReplays/ggtracker_93731.SC2Replay':
+        if(filename != TEST_REPLAY) and filename[len(DIR_NAME) + len(DIR_SEPARATOR)] != '.':
 
             hotVectorData = parser.getTrainHotVectorData(filename)
+            print filename
             xTempTrainData, yTempTrainData = svmHandler.callTrainSVM(hotVectorData)
 
             for temp in xTempTrainData:
@@ -70,13 +82,15 @@ def trainSVM():
 def runProject():
     commentOnList = parser.getPrintData(TEST_REPLAY)
     hotVectorData = parser.getTestHotVectorData(TEST_REPLAY)
+    print hotVectorData
     yOut1,yOut2 = svmHandler.callTestSVM(hotVectorData)
     print("Player 1 : ",yOut1)
     print("Player 2 : ", yOut2)
-    comment(commentOnList)
+    print("and player", parser.getWinner(TEST_REPLAY), "actually won the game")
+    comment(commentOnList, yOut1, yOut2)
 
 
 
 trainSVM()
-# runProject()
+runProject()
 

@@ -31,17 +31,17 @@ def Comment(history, comment):
 
 
 
-# history = []
-# # a = helper.introLine()
-# a = []
-# a += ["comment 1"]
-# a += ["comment 2"]
-# a += ["comment 3"]
-# a += ["comment 4"]
-# a += ["comment 5"]
-# a += ["comment 6"]
-# a += ["comment 7"]
-# a += ["comment 8"]
+history = []
+# a = helper.introLine()
+a = []
+a += ["comment 1"]
+a += ["comment 2"]
+a += ["comment 3"]
+a += ["comment 4"]
+a += ["comment 5"]
+a += ["comment 6"]
+a += ["comment 7"]
+a += ["comment 8"]
 
-# for i in a:
-#     history = Comment(history, i)
+for i in a:
+    history = Comment(history, i)

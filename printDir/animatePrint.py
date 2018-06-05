@@ -1,10 +1,35 @@
 import time,sys
+import os
+
+
+history = [] ## Our global event array
+STAR_LENGTH = 30
+
+# Print the history 
+def printHistory():
+    for pastComment in history:
+        print (pastComment)
+
+    # printing the required data
+    blank = ""
+    seperator = ""
+    for i in range(0,STAR_LENGTH):
+        seperator += "*"
+        blank += " "
+
+    print(seperator)
+    print(blank)
+    print("          ")
+
 
 # inputString  -> STRING that needs to be animated
 # newLine -> BOOL specifies if new line is required at the end of the string
 # speed -> specify fast, medium or slow animation
 
 def commentate(inputString, newLine, speed):
+
+    os.system('clear')
+    printHistory()
 
     # making sure all inputs are valid
     start = time.time()
@@ -46,6 +71,8 @@ def commentate(inputString, newLine, speed):
         sys.stdout.flush()
         time.sleep(frequency)
     end = time.time()
+
+    history.append(inputString)
     return (end - start)
 
 

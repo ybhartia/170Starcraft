@@ -21,7 +21,7 @@ def pickRandom(list):
 # Intro function that introduces the players and their matchups and win rates if provided
 # players := replay.clients
 #
-def getIntro(players):
+def getIntro():
 
 
 	# introduces the commentator and the start
@@ -66,7 +66,7 @@ def getUnitBornLines(player, unit):
 	lines = []
 	lines += [ player + "'s " + unit + " is ready to go." ]
 	lines += [ unit + "'s production is completed for " + player + "." ]
-	lines += [ "What will " + player + " do with that " + unit + "?"]
+	lines += [ "What will " + player + " do with that new " + unit + "?"]
 	lines += [ "Hey " + player + " your " + unit + " is here!"]
 	return lines
 
@@ -115,8 +115,8 @@ def getUpgradeCompleteLines(player, upgrade, unit):
 
 
 
-def getTypeChangeLine(player, unit, previous, faction, isBuilding):
-	listOfLines = getTypeChangeLines(player, unit, previous, faction, isBuilding)
+def getTypeChangeLine(player, unit, faction):
+	listOfLines = getTypeChangeLines(player, unit, faction)
 	line = pickRandom(listOfLines)
 	return line
 
@@ -124,20 +124,18 @@ def getTypeChangeLine(player, unit, previous, faction, isBuilding):
 # player, unit, previous, faction are strings, previous is the name of previous unit
 # isBuilding is a boolean 
 #
-def getTypeChangeLines(player, unit, previous, faction, isBuilding):
+def getTypeChangeLines(player, unit, faction): 
 	lines = []
 	if faction == "Terran":
-		if isBuilding:
-			lines += [ player + "'s " + unit + " completed." ]
-		else:
-			lines += [ player + "'s " + previous + " has switch to " + unit + " mode."]
+		lines +=  [player + " has upgraded " + unit]
+		lines += [ player + "'s " + unit + " has put on his big boy pants!"]
 	elif faction == "Zerg":
-		lines += [ player + "'s " + previous + " has morphed to " + unit ]
+		lines += [ player + " has morphed his " + unit ]
+		lines += [ player + "'s unit grown up to be a " + unit + "!"]
+		
 	elif faction == "Protoss":
-		if isBuilding:
-			lines += [ player + "'s " + unit + " completed." ]
-		else:
-			lines += [ player + "'s " + previous + " has switch to " + unit + " mode."]
+		lines += [ player + " has upgraded " + unit]
+		lines += [ player + "'s " + unit + " has put on his big alien boy pants!"]
 	return lines
 
 #
@@ -175,8 +173,8 @@ def shouldIgnore(unit):
 	return False
 
 
-print getTypeChangeLine("Hung", "Banneling", "Zergling", "Zerg", False)
-print getUpgradeCompleteLine("Hung", "Zerg Attact Increase", "Zergling")
+# print getTypeChangeLine("Hung", "Banneling", "Zergling", "Zerg", False)
+# print getUpgradeCompleteLine("Hung", "Zerg Attact Increase", "Zergling")
 
 
 # Commentate on human or not as well as number of players and races 
