@@ -54,9 +54,9 @@ def initiatePlayers(replay):
         obj.teamid = player.team_id
 
         if player.result == "Win":
-            obj.result = 2
-        elif player.result == "Loss":
             obj.result = 1
+        elif player.result == "Loss":
+            obj.result = 0
         if player.play_race == "Protoss":
             obj.protoss = 1
         elif player.play_race == "Zerg":

@@ -6,6 +6,9 @@ import SVM.svmHandler as svmHandler
 from os import listdir
 import os
 import random
+import sc2reader
+from sc2reader.engine.plugins import APMTracker
+
 
 DIR_SEPARATOR = '/'
 # commentOnList = [[18, 'Trentos', 'Probe', 'UnitBornEvent'], [19, 'Onion', 'Probe', 'UnitBornEvent'], [35, 'Trentos', 'Probe', 'UnitBornEvent'], [36, 'Onion', 'Probe', 'UnitBornEvent']]
@@ -112,28 +115,28 @@ def TestSVM(filename):
     commentOnList = parser.getPrintData(filename)
     hotVectorData = parser.getTestHotVectorData(filename)
     yOut1,yOut2 = svmHandler.callTestSVM(hotVectorData)
-    print("Player 1 : ",yOut1)
-    print("Player 2 : ", yOut2)
+    
+    sc2reader.engine.register_plugin(APMTracker())
+    replay = sc2reader.load_replay(filename, load_level=4)
+
+    players = parser.initiatePlayers(replay)
+
+    team1 = []
+    team2 = []
+
+    for player in players:
+        if player.teamid == 1:
+            team1.append([player.playerName])
+        else:
+            team2.append([player.playerName])
+
+    print("Player 1 : ",yOut1, yOut1[len(yOut1)-1])
+    print("Player 2 : ", yOut2, yOut2[len(yOut2)-1])
     print("According to us " + parser.getWinner(filename)+ " actually won the game")
-    if yOut1[len(yOut1)-1] > yOut1[len(yOut1)-1]
-    # comment(commentOnList, yOut1, yOut2)
-
-
-#
-#
-#.MAIN FUNCTION THAT IS GOING TO DO EVERYTHING
-#
-#
-def runProject():
-    commentOnList = parser.getPrintData(TEST_REPLAY)
-    hotVectorData = parser.getTestHotVectorData(TEST_REPLAY)
-    print hotVectorData
-    yOut1,yOut2 = svmHandler.callTestSVM(hotVectorData)
-    print("Player 1 : ",yOut1)
-    print("Player 2 : ", yOut2)
-    print("and player", parser.getWinner(TEST_REPLAY), "actually won the game")
-    comment(commentOnList, yOut1, yOut2)
-
+    if yOut1[len(yOut1)-1] > yOut2[len(yOut2)-1]:
+        print(team1)
+    else:
+        print(team2)
 
 DIR_NAME = "workingReplays"
 # TEST_REPLAY = "workingReplays/OneSideDominates.SC2Replay"

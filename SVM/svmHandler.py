@@ -52,8 +52,8 @@ def seperatePlayer(rawData):
 	# getting the classification
 	rawData1 = np.array(rawData1[1:])
 	rawData2 = np.array(rawData2[1:])
-	rawData1 = rawDataWin[:,:-1]
-	rawData2 = rawDataLost[:,:-1]
+	rawData1 = rawData1[:,:-1]
+	rawData2 = rawData2[:,:-1]
 
 	return rawData1, rawData2
 
