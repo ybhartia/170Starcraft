@@ -46,37 +46,6 @@ def getLine(event):
 
 
 
-# #
-# # going through the replay directory and train through replays
-# #
-# def trainSVM():
-
-#     # initialize the variables
-#     xTrainData =[[]]
-#     yTrainData = []
-
-#     # going through the directory
-#     for filename in listdir(DIR_NAME):
-
-
-#         # Setting right path to filename
-#         filename = DIR_NAME + DIR_SEPARATOR + filename
-
-#         # Not training with the test replay
-#         if(filename != TEST_REPLAY) and filename[len(DIR_NAME) + len(DIR_SEPARATOR)] != '.':
-
-#             hotVectorData = parser.getTrainHotVectorData(filename)
-#             print filename
-#             xTempTrainData, yTempTrainData = svmHandler.callTrainSVM(hotVectorData)
-
-#             for temp in xTempTrainData:
-#                 xTrainData.append(temp)
-#             yTrainData += yTempTrainData
-
-
-#     svmHandler.callTrainReplays(xTrainData[1:], yTrainData)
-
-
 #
 # going through the replay directory and train through replays
 #
@@ -100,7 +69,6 @@ def trainSVM(directoryName):
         if(filename != testFile) and filename[len(directoryName) + len(DIR_SEPARATOR)] != '.':
 
             hotVectorData = parser.getTrainHotVectorData(filename)
-            print filename
             xTempTrainData, yTempTrainData = svmHandler.callTrainSVM(hotVectorData)
 
             for temp in xTempTrainData:
@@ -223,8 +191,34 @@ def TestSVMSigmoid(filename):
     else:
         return 0
 
+#
+# going through the replay directory and train through replays
+#
+def trainGiven(trainFilenames, directoryName):
 
-directoryName = "workingReplays"
+    # initialize the variables
+    xTrainData =[[]]
+    yTrainData = []
+
+    # going through the directory
+    for fileName in trainFilenames:
+
+        # Setting right path to filename
+        filename = directoryName + DIR_SEPARATOR + fileName
+
+        # Not training with the test replay
+        if fileName[0] != '.':
+
+            hotVectorData = parser.getTrainHotVectorData(filename)
+            xTempTrainData, yTempTrainData = svmHandler.callTrainSVM(hotVectorData)
+
+            for temp in xTempTrainData:
+                xTrainData.append(temp)
+
+            yTrainData += yTempTrainData
+
+
+    svmHandler.callTrainReplays(xTrainData[1:], yTrainData)
 
 
 def TESTall(testingFiles, directoryName):
@@ -240,7 +234,6 @@ def TESTall(testingFiles, directoryName):
 
     for testFile in testingFiles:
         if(testFile[0] != '.'):
-            print(directoryName + DIR_SEPARATOR + testFile)
             
             resultLinear = TestSVMLinear(directoryName + DIR_SEPARATOR + testFile)
             resultSigmoid = TestSVMSigmoid(directoryName + DIR_SEPARATOR + testFile)
@@ -262,30 +255,36 @@ def TESTall(testingFiles, directoryName):
     print "Poly",accuracyPoly           
     print "Sigmoid",accuracyLinear
 
+directoryName = "workingReplays"
 numReplays = len(listdir(directoryName))
+
 
 # TRAINING 
 # print(" HEY LETS TRAIN LIKE CUNTS")
 # testFile = trainSVM(directoryName)
 
 
-# # TESTING ONECE
-# TestSVM(directoryName + DIR_SEPARATOR + testFile)
-
-# TESTING TO GENERATE ACCURACY
-print(" HEY I'M CALCULATING YOUR ACCURACY, GO SMOKE SOME POT")
-success = 0
-attempts = 20
-numReplays = len(listdir(directoryName))
+#################TEST ALL FILES AND EVALUATE
 Replays = listdir(directoryName)
 Replays = sorted(Replays)
-counter = 0
-for replay in Replays:
-    print counter, replay
-    counter = counter + 1
 
-testReplays = Replays[len(Replays) - 10:]
+for i in range(0,len(Replays)):
+    print i, Replays[i]
+    if Replays[i][0] != '.':
+        TestSVMLinear(directoryName + DIR_SEPARATOR + Replays[i])
 
-print testReplays
-TESTall(testReplays, directoryName)
+
+########## TESTING TO GENERATE ACCURACY with different training
+# Replays = listdir(directoryName)
+# Replays = sorted(Replays)
+
+
+# for trainCounter in [5,10,15,20,25]:
+#     print trainCounter
+#     trainReplays = Replays[10:10+trainCounter]
+#     testReplays = Replays[:10]
+
+#     trainGiven(trainReplays, directoryName)
+
+#     TESTall(testReplays, directoryName)
 
