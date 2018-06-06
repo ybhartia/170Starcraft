@@ -6,6 +6,7 @@ import SVM.svmHandler as svmHandler
 from os import listdir
 import os
 import random
+import math
 
 DIR_SEPARATOR = '/'
 DIR_TEST = "HungsReplayTvZ.SC2Replay"
@@ -16,18 +17,46 @@ DIR_TEST = "HungsReplayTvZ.SC2Replay"
 # Comment given events and player predictions
 #
 def comment(commentOnList, p1Predictions, p2Predictions, replay):
-
-    timeInSec = animate.commentate(helper.getIntro(), True, 'm')
-    timeInSec += animate.commentate(helper.getTeamIntro(parser.getAllPlayers(replay)), True, 'm')
+    AICommentCount = 1
+    timeInSec = animate.commentate(helper.getIntro(), True, 'm', "basic")
+    timeInSec += animate.commentate(helper.getTeamIntro(parser.getAllPlayers(replay)), True, 'm', "basic")
     for event in commentOnList:
         if(event == ""):
             continue
         while (timeInSec < (event[0]/1.4)):
             animate.moveOn(.5)
             timeInSec += .5
+            timeInSec += animate.updateTime(getTime(timeInSec*1.4))
         commentLine = getLine(event, replay)
+        if (timeInSec > 60*AICommentCount):
+            if AICommentCount - 1 < len(p1Predictions):
+                outcome = p1Predictions[AICommentCount - 1] - p2Predictions[AICommentCount - 1]
+                timeInSec += animate.commentate(getTime(event[0]) + "  " + helper.getAIPrint(outcome, parser.getAllPlayers(replay)) + 
+                    getScores(p1Predictions[AICommentCount - 1], p2Predictions[AICommentCount - 1]), True, 'm', "ai")
+                AICommentCount += 1
+        timeInSec += animate.updateTime(getTime(timeInSec*1.4))
+        timeInSec += animate.commentate(getTime(event[0]) + "  " + commentLine, True, 'm', "basic")
+    animate.commentate(helper.getClosing(), True, 'm', "closing")
 
-        timeInSec += animate.commentate(str(event[0]/1.4) + ': ' + commentLine, True, 'm')
+def getScores(p1Score, p2Score):
+    return " [Team 1: " + str(p1Score) + " Team 2: " + str(p2Score) + " ]"
+
+#
+# Get time in the bet order
+#
+def getTime(time):
+    time = time/1.4
+    minutes = int(math.floor(time/60))
+    seconds = int(math.floor(time)%60)
+
+    if(minutes < 10):
+        minutes =  "0" + str(minutes)
+
+    if(seconds < 10):
+        seconds =  "0" + str(seconds)
+
+    return str(minutes) + ":" + str(seconds)
+
 
 def getLine(event, replay):
     player = event[1]
@@ -100,8 +129,8 @@ def trainSVM(directoryName):
         # Not training with the test replay
         if(filename != testFile) and filename[len(directoryName) + len(DIR_SEPARATOR)] != '.':
 
-            hotVectorData = parser.getTrainHotVectorData(filename)
             print filename
+            hotVectorData = parser.getTrainHotVectorData(filename)
             xTempTrainData, yTempTrainData = svmHandler.callTrainSVM(hotVectorData)
 
             for temp in xTempTrainData:
@@ -141,7 +170,8 @@ DIR_NAME = "workingReplays"
 directoryName = "workingReplays"
 
 
-testFile = trainSVM(directoryName)
+# testFile = trainSVM(directoryName)
+testFile = "HungsReplayTvZ.SC2Replay"
 runProject(DIR_NAME + DIR_SEPARATOR + testFile)
 # TestSVM(DIR_NAME + DIR_SEPARATOR + testFile)
 # print(testFile)

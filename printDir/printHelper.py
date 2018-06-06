@@ -29,6 +29,87 @@ def getIntro():
 	intro = pickRandom(introLines)
 	return intro
 
+
+def getClosing():
+	listOfLines = getClosingLines()
+	line = pickRandom(listOfLines)
+	return line
+	
+def getClosingLines():
+	lines = []
+	lines += ["That's it folks. I hope you enjoyed my commentary!"]
+	lines += ["A truly interesting match! I'm done here, so so are you."]
+	lines += ["My commentary was next level right? I'm here all week."]
+	lines += ["Match over! Have a nice day."]
+
+
+def getAIPrint(outcome, players):
+	team1 = []
+	team2 = []
+	for player in players:
+		if player.team_id == 1:
+			team1.append(player.name)
+		else:
+			team2.append(player.name)
+	matchup1 = team1[0]
+	matchup2 = team2[0]
+	for i in range(1,len(team1)):
+		matchup1 += ", " + team1[i]
+		matchup2 += ", " + team2[i]
+
+	if outcome > 3:
+		return dominatedLine(matchup1, matchup2)
+	elif outcome > 0:
+		return winningLine(matchup1, matchup2)
+	elif outcome == 0:
+		return closeMatch(matchup1, matchup2)
+	elif outcome < -3:
+		return dominatedLine(matchup2, matchup1)
+	else:
+		return winningLine(matchup2, matchup1)
+
+
+def dominatedLine(team1, team2):
+	listOfLines = getDominatedLines(team1, team2)
+	line = pickRandom(listOfLines)
+	return line
+
+def winningLine(team1, team2):
+	listOfLines = getWinningLines(team1, team2)
+	line = pickRandom(listOfLines)
+	return line
+
+
+def closeMatch(team1, team2):
+	listOfLines = getCloseMatchLines(team1, team2)
+	line = pickRandom(listOfLines)
+	return line
+
+
+def getDominatedLines(team1, team2):
+	lines = []
+	lines.append(team1 + " is crushing " + team2 + "!")
+	lines.append(team2 + " is getting dominated by " + team1 + "!")
+	lines.append("It's looking really bleak for " + team2 + ".")
+	lines.append("At this rate, " + team1 + " will win pretty soon against " + team2 + "!")
+	return lines
+
+def getWinningLines(team1, team2):
+	lines = []
+	lines.append(team1 + " is pulling ahead of " + team2 + ".")
+	lines.append(team2 + " is winning! Psych lmao! Actually " + team1 + " is winning.")
+	lines.append("It's getting harder for " + team2 + " to stay in the game.")
+	lines.append("The scales are slipping towards" + team1 + ".")
+	return lines
+
+def getCloseMatchLines(team1, team2):
+	lines = []
+	lines.append(team1 + " and " + team2 + " are head to head!")
+	lines.append("What do you call a flammable piece of wood sitting right next to you? It's a close match!")
+	lines.append("I guess we need a DNA test to differentiate this one. The teams look pretty identical!")
+	lines.append(team1 + " and " + team2 + " are doing pretty well against each other. It's gonna be an exciting one!")
+	return lines
+
 #
 # Introductory Line 
 #

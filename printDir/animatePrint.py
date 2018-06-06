@@ -2,14 +2,17 @@ import time,sys
 import os
 
 
-history = [] ## Our global event array
-STAR_LENGTH = 30
+basicHistory = ["******* BASIC PRINTS ********\n", "\n", "\n", "\n", "\n", "\n"] ## Our global event array
+AIHistory = ["******* AI PRINTS ********", "\n", "\n", "\n", "\n", "\n"] ## Our global event array
+STAR_LENGTH = 45
 
 # Print the history 
 def printHistory():
-    for pastComment in history:
+    for pastComment in basicHistory:
         print (pastComment)
 
+    for pastComment in AIHistory:
+        print (pastComment)
     # printing the required data
     blank = ""
     seperator = ""
@@ -26,7 +29,7 @@ def printHistory():
 # newLine -> BOOL specifies if new line is required at the end of the string
 # speed -> specify fast, medium or slow animation
 
-def commentate(inputString, newLine, speed):
+def commentate(inputString, newLine, speed, hist):
 
     os.system('clear')
     printHistory()
@@ -70,9 +73,27 @@ def commentate(inputString, newLine, speed):
         time.sleep(frequency)
     end = time.time()
 
-    history.append(inputString)
+
+    appendToHistory(inputString, hist)
     return (end - start)
 
+def updateTime(time2):
+    os.system('clear')
+
+    AIHistory[0] = AIHistory[0][0:27] + " " + time2 + "  *******"
+    printHistory()
+    start = time.time()
+    end = time.time()
+    return (end - start)
+
+
+def appendToHistory(inputString, hist):
+    if(hist == "basic"):
+        del basicHistory[1];
+        basicHistory.append(inputString)
+    elif (hist != "closing"):
+        del AIHistory[1];
+        AIHistory.append(inputString)
 
 def moveOn(sleeptime):
     time.sleep(sleeptime)
