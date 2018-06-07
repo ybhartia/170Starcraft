@@ -18,7 +18,11 @@ plt.plot(year, gg_confidence, color='g', label='gg_Replays\' Confidence')
 
 plt.plot(year, our_confidence, 'ro',color='orange')
 plt.plot(year, our_confidence, color='orange',label='Our Commenter\'s Confidence')
+
 plt.xlabel('Training Size')
 plt.ylabel('Normalized Confidence')
 plt.title('Confidence in Prediction')
+
+
+plt.legend(loc=3)
 plt.show()

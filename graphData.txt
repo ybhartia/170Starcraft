@@ -1,20 +1,56 @@
 5
+Linear 0.2
+Poly 0.6
+Sigmoid 0.7
+10
 Linear 0.6
 Poly 0.6
-Sigmoid 0.6
-10
-Linear 0.7
-Poly 0.7
 Sigmoid 0.7
 15
 Linear 0.5
-Poly 0.5
-Sigmoid 0.5
+Poly 0.3
+Sigmoid 0.7
 20
-Linear 0.5
-Poly 0.5
-Sigmoid 0.5
+Linear 0.7
+Poly 0.2
+Sigmoid 0.7
 25
-Linear 0.8
+Linear 0.63
+Poly 0.3
+Sigmoid 0.6
+30
+Linear 0.68
+Poly 0.5
+Sigmoid 0.7
+35
+Linear 0.66
 Poly 0.8
-Sigmoid 0.8
+Sigmoid 0.7
+40
+Linear 0.54
+Poly 0.9
+Sigmoid 0.7
+45
+Linear 0.65
+Poly 0.8
+Sigmoid 0.5
+50
+Linear 0.68
+Poly 0.75
+Sigmoid 0.5
+55
+Linear 0.69
+Poly 0.74
+Sigmoid 0.5
+60
+Linear 0.74
+Poly 0.78
+Sigmoid 0.5
+65
+Linear 0.69 
+Poly 0.8
+Sigmoid 0.5
+70
+Linear 0.65
+Poly 0.69
+Sigmoid 0.5

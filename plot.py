@@ -21,14 +21,25 @@ with open('graphData.txt') as file:
 		elif entries[0] == "Sigmoid":
 			entriesSig.append(entries[1])
 	
-plt.ylim(-0.5, 1.5)
-plt.xlim(0,30)
+plt.ylim([0, 1])
+plt.xlim([0,70])
+plt.grid(color='r', linestyle='-', linewidth=0.12)
+
+
+plt.plot(X_axis, entriesLin,'ro', color='blue')
+plt.plot(X_axis, entriesPol,'ro',color='red')
+plt.plot(X_axis, entriesSig,'ro', color='green')
 
 plt.plot(X_axis, entriesLin, label = "linear", color='blue')
 plt.plot(X_axis, entriesPol, label = "polynomial", color='red')
 plt.plot(X_axis, entriesSig, label = "sigmoid", color='green')
 
-plt.legend()
+
+plt.xlabel('Training Size')
+plt.ylabel('Accuracy')
+plt.title('Model Accuracy Comparision')
+
+plt.legend(loc = 4)
 plt.show()
 
 
