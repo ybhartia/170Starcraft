@@ -14,10 +14,14 @@ index = np.arange(n_groups)
 rects1 = plt.bar(index, Linear, 0.2, alpha=0.5, color='b', label='Linear')
 rects2 = plt.bar(index + 0.2, Sigmoid, 0.2, alpha=0.5, color='g', label='Sigmoid')
 rects3 = plt.bar(index + 0.4, Sigmoid, 0.2, alpha=0.5, color='r', label='Polynomial')
- 
+plt.axis('tight')
+# plt.xlim([0, 50]).tight
+plt.ylim([0, 1])
+
 plt.xlabel('Training Replays')
 plt.ylabel('Accuracy')
-plt.xticks(index + 0.2, ['5', '10','15', '20','25', '30','35', '40',])
+plt.xticks(index + 0.4, [5, 10,15, 20,25, 30,35, 40])
 plt.legend()
  
 plt.show()
+

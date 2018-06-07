@@ -234,7 +234,6 @@ def TESTall(testingFiles, directoryName):
 
     for testFile in testingFiles:
         if(testFile[0] != '.'):
-            
             resultLinear = TestSVMLinear(directoryName + DIR_SEPARATOR + testFile)
             resultSigmoid = TestSVMSigmoid(directoryName + DIR_SEPARATOR + testFile)
             resultPoly = TestSVMPoly(directoryName + DIR_SEPARATOR + testFile)
@@ -265,26 +264,26 @@ numReplays = len(listdir(directoryName))
 
 
 #################TEST ALL FILES AND EVALUATE
-Replays = listdir(directoryName)
-Replays = sorted(Replays)
-
-for i in range(0,len(Replays)):
-    print i, Replays[i]
-    if Replays[i][0] != '.':
-        TestSVMLinear(directoryName + DIR_SEPARATOR + Replays[i])
-
-
-########## TESTING TO GENERATE ACCURACY with different training
 # Replays = listdir(directoryName)
 # Replays = sorted(Replays)
 
+# for i in range(56,len(Replays)):
+#     print i, Replays[i]
+#     if Replays[i][0] != '.':
+#         TestSVMLinear(directoryName + DIR_SEPARATOR + Replays[i])
 
-# for trainCounter in [5,10,15,20,25]:
-#     print trainCounter
-#     trainReplays = Replays[10:10+trainCounter]
-#     testReplays = Replays[:10]
 
-#     trainGiven(trainReplays, directoryName)
+########## TESTING TO GENERATE ACCURACY with different training
+Replays = listdir(directoryName)
+Replays = sorted(Replays)
 
-#     TESTall(testReplays, directoryName)
+
+for trainCounter in [5,10,15,20,25,30,35,40,45,50,55,60,65,70]:
+
+    trainReplays = Replays[25:25+trainCounter]
+    testReplays = Replays[:10]
+    print trainCounter
+    trainGiven(trainReplays, directoryName)
+    # print testReplays
+    TESTall(testReplays, directoryName)
 
