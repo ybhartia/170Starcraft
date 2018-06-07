@@ -7,6 +7,7 @@ from os import listdir
 import os
 import random
 import math
+import sys
 
 DIR_SEPARATOR = '/'
 DIR_TEST = "HungsReplayTvZ.SC2Replay"
@@ -163,6 +164,7 @@ def runProject(testFile):
 
 
 
+
 DIR_NAME = "workingReplays"
 # TEST_REPLAY = "workingReplays/OneSideDominates.SC2Replay"
 # TEST_REPLAY_TWO = "workingReplays/ggtracker_93731.SC2Replay"
@@ -171,9 +173,19 @@ directoryName = "workingReplays"
 
 
 # testFile = trainSVM(directoryName)
-testFile = "HungsReplayTvZ.SC2Replay"
-runProject(DIR_NAME + DIR_SEPARATOR + testFile)
+testFile = "TerranDoAll.SC2Replay"
+
+## runProject(DIR_NAME + DIR_SEPARATOR + testFile)
+
 # TestSVM(DIR_NAME + DIR_SEPARATOR + testFile)
 # print(testFile)
 # runProject()
 
+
+try:
+    if(len(sys.argv) > 1):
+        runProject(sys.argv[1])
+    else:
+        print "A replay file needs to be provided."
+except:
+    print "File needs to be a replay file (.SC2Replay)."
