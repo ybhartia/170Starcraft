@@ -1,3 +1,5 @@
+
+import matplotlib.pyplot as plt
 import parsing.parser as parser
 import sys
 import printDir.animatePrint as animate
@@ -263,27 +265,57 @@ numReplays = len(listdir(directoryName))
 # testFile = trainSVM(directoryName)
 
 
-#################TEST ALL FILES AND EVALUATE
+#################TEST ALL FILES AND EVALUATE #####################################
 # Replays = listdir(directoryName)
 # Replays = sorted(Replays)
-
+#
 # for i in range(56,len(Replays)):
 #     print i, Replays[i]
 #     if Replays[i][0] != '.':
 #         TestSVMLinear(directoryName + DIR_SEPARATOR + Replays[i])
+#
+#
+########## TESTING TO GENERATE ACCURACY with different training ##################
+# Replays = listdir(directoryName)
+# Replays = sorted(Replays)
+#
+#
+# for trainCounter in [5,10,15,20,25,30,35,40,45,50,55,60,65,70]:
+#
+#     trainReplays = Replays[25:25+trainCounter]
+#     testReplays = Replays[:10]
+#     print trainCounter
+#     trainGiven(trainReplays, directoryName)
+#     # print testReplays
+#     TESTall(testReplays, directoryName)
+#
+############ PRINTING yout1 Vs yOUt2 ###################
 
+directoryName = "workingReplays"
+numReplays = len(listdir(directoryName))
 
-########## TESTING TO GENERATE ACCURACY with different training
 Replays = listdir(directoryName)
 Replays = sorted(Replays)
 
+Replays = Replays[1:]
 
-for trainCounter in [5,10,15,20,25,30,35,40,45,50,55,60,65,70]:
+for replay in Replays:
+    filename = directoryName + DIR_SEPARATOR + replay
+    hotVectorData = parser.getTestHotVectorData(filename)
+    yOut1,yOut2 = svmHandler.callTestSVMSigmoid(hotVectorData)
+    
+    print filename
+    print yOut1
+    print yOut2  
+    # plt.grid(color='r', linestyle='-', linewidth=0.12)
+    # plt.plot(range(0,len(yOut1)), yOut1 ,color='g', label = 'player 1')
+    # plt.plot(range(0,len(yOut2)), yOut2 ,color='g', label = 'player 2')
 
-    trainReplays = Replays[25:25+trainCounter]
-    testReplays = Replays[:10]
-    print trainCounter
-    trainGiven(trainReplays, directoryName)
-    # print testReplays
-    TESTall(testReplays, directoryName)
+    # plt.xlabel('Timestamp')
+    # plt.ylabel('Win Probability')
+    # plt.title(replay)
 
+
+    # plt.legend(loc=3)
+    # plt.show()
+    # plt.save(replay)

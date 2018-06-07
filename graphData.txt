@@ -1,56 +1,304 @@
-5
-Linear 0.2
-Poly 0.6
-Sigmoid 0.7
-10
-Linear 0.6
-Poly 0.6
-Sigmoid 0.7
-15
-Linear 0.5
-Poly 0.3
-Sigmoid 0.7
-20
-Linear 0.7
-Poly 0.2
-Sigmoid 0.7
-25
-Linear 0.63
-Poly 0.3
-Sigmoid 0.6
-30
-Linear 0.68
-Poly 0.5
-Sigmoid 0.7
-35
-Linear 0.66
-Poly 0.8
-Sigmoid 0.7
-40
-Linear 0.54
-Poly 0.9
-Sigmoid 0.7
-45
-Linear 0.65
-Poly 0.8
-Sigmoid 0.5
-50
-Linear 0.68
-Poly 0.75
-Sigmoid 0.5
-55
-Linear 0.69
-Poly 0.74
-Sigmoid 0.5
-60
-Linear 0.74
-Poly 0.78
-Sigmoid 0.5
-65
-Linear 0.69 
-Poly 0.8
-Sigmoid 0.5
-70
-Linear 0.65
-Poly 0.69
-Sigmoid 0.5
+workingReplays/3v3.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/AIvsAlGhadouriTvP.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/FadingLightvsJaketylerTvZ.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/FadingLightvsKingsBladeTVZ.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/HungsReplayTvZ.SC2Replay
+[0, 0, 0, 0, 0, 0, 0]
+[1, 2, 2, 2, 2, 2, 2]
+workingReplays/OneSideDominates.SC2Replay
+[0, 0, 0, 0, 0, 0, 0]
+[1, 2, 2, 2, 2, 2, 2]
+workingReplays/OnionvsTrentosPvP.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/TerranDoAll.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/gatolocovsMagynerZvZ.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94781.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94784.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_94786.SC2Replay
+[0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0]
+workingReplays/ggtracker_94788.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94916.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94917.SC2Replay
+[0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94918.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94919.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94921.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94923.SC2Replay
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_94924.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2]
+[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 2, 3]
+workingReplays/ggtracker_94925.SC2Replay
+[1, 2, 2, 2, 2, 2, 2]
+[1, 1, 1, 1, 2, 3, 4]
+workingReplays/ggtracker_94926.SC2Replay
+[1, 2, 2, 2, 2, 2, 2]
+[1, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_94927.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94929.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94930.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1]
+[0, 0, 0, 0, 0, 1, 2, 3, 3, 3, 4, 5]
+workingReplays/ggtracker_94931.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94932.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94933.SC2Replay
+[1, 2, 2, 2, 2, 2]
+[1, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_94934.SC2Replay
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94935.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_94938.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+workingReplays/ggtracker_94939.SC2Replay
+[1, 2, 2, 2, 2, 2, 2]
+[0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94953.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94970.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 1]
+[1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94971.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94972.SC2Replay
+[0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94973.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_94974.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_94975.SC2Replay
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94976.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94977.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_94978.SC2Replay
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94979.SC2Replay
+[0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1]
+workingReplays/ggtracker_94980.SC2Replay
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
+workingReplays/ggtracker_94982.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_94983.SC2Replay
+[0, 0, 0, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94984.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_94985.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94986.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94987.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_94988.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1]
+workingReplays/ggtracker_94989.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94990.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 4, 5, 6, 6, 6, 6, 6, 6]
+workingReplays/ggtracker_94991.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+workingReplays/ggtracker_94992.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94993.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_94995.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94997.SC2Replay
+[0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_94999.SC2Replay
+[1, 2, 2, 2, 2, 2]
+[0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_95887.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_95889.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 1, 2, 2]
+[0, 0, 0, 0, 0, 1, 1, 1, 1, 2]
+workingReplays/ggtracker_95891.SC2Replay
+[1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_95893.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_95894.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1]
+
+
+
+
+workingReplays/ggtracker_95895.SC2Replay
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2]
+workingReplays/ggtracker_95896.SC2Replay
+[1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0]
+workingReplays/ggtracker_95900.SC2Replay
+[0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 1, 1, 1, 1]
+workingReplays/ggtracker_95905.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_95910.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1]
+[1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_95915.SC2Replay
+[1, 1, 1]
+[0, 0, 1]
+workingReplays/ggtracker_95920.SC2Replay
+[1, 1, 1, 1, 1, 1]
+[1, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_95932.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_95949.SC2Replay
+[0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0]
+workingReplays/ggtracker_95953.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_96103.SC2Replay
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_96106.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_96107.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 1, 2, 2, 2, 2]
+workingReplays/ggtracker_96109.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3]
+workingReplays/ggtracker_96111.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_96146.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_96147.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 1]
+workingReplays/ggtracker_96148.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+workingReplays/ggtracker_96149.SC2Replay
+[0, 0, 0, 0]
+[0, 0, 0, 0]
+workingReplays/ggtracker_96151.SC2Replay
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_96154.SC2Replay
+[1, 2, 2, 2, 2, 2]
+[1, 2, 2, 2, 2, 2]
+workingReplays/ggtracker_96155.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_96156.SC2Replay
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_96157.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_96159.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_96160.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 1, 2]
+workingReplays/ggtracker_96161.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_96166.SC2Replay
+[1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_96167.SC2Replay
+[1, 1, 1, 1, 1]
+[1, 1, 1, 1, 1]
+workingReplays/ggtracker_96169.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_96177.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+workingReplays/ggtracker_96183.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
+workingReplays/ggtracker_96184.SC2Replay
+[1, 2, 2, 2]
+[0, 0, 0, 0]
+workingReplays/ggtracker_96185.SC2Replay
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+workingReplays/ggtracker_96186.SC2Replay
+[0]
+[0]
+workingReplays/ggtracker_96187.SC2Replay
+[0, 0, 0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0, 0, 0]

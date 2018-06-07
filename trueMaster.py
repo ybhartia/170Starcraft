@@ -45,41 +45,6 @@ def getLine(event, replay):
         return player + ' ' + unit + ' ' + event[3]
 
 
-
-# #
-# # going through the replay directory and train through replays
-# #
-# def trainSVM():
-
-#     # initialize the variables
-#     xTrainData =[[]]
-#     yTrainData = []
-
-#     # going through the directory
-#     for filename in listdir(DIR_NAME):
-
-
-#         # Setting right path to filename
-#         filename = DIR_NAME + DIR_SEPARATOR + filename
-
-#         # Not training with the test replay
-#         if(filename != TEST_REPLAY) and filename[len(DIR_NAME) + len(DIR_SEPARATOR)] != '.':
-
-#             hotVectorData = parser.getTrainHotVectorData(filename)
-#             print filename
-#             xTempTrainData, yTempTrainData = svmHandler.callTrainSVM(hotVectorData)
-
-#             for temp in xTempTrainData:
-#                 xTrainData.append(temp)
-#             yTrainData += yTempTrainData
-
-
-#     svmHandler.callTrainReplays(xTrainData[1:], yTrainData)
-
-
-#
-# going through the replay directory and train through replays
-#
 def trainSVM(directoryName):
 
     # initialize the variables
