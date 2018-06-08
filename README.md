@@ -10,13 +10,7 @@ Use the following command to run the project:
 
 Where path `path/to/replay/replay.SC2Replay` is the replay including path to the replay. It can be an absolute or relative path.
 
-<<<<<<< HEAD
-Some replays are provided
-
-Use `sudo pip install` for any modules that requires by `trueMaster.py` or any missing modules.
-=======
 Use `sudo pip install` for any modules that are required by `trueMaster.py` or any missing modules.
->>>>>>> 70bcaf06dc24209b5c30db1d286869faf9ca7b84
 
 ### Other Modules
 
