@@ -2,14 +2,14 @@
 
 ## Manual
 
-Download or clone the projet [here](https://github.com/ybhartia/170Starcraft).
+Download or clone the project [here](https://github.com/ybhartia/170Starcraft).
 
 Use the following command to run the project:
 	python trueMaster.py path/to/replay/replay.SC2Replay
 
 Where path `path/to/replay/replay.SC2Replay` is the replay including path to the replay. It can be an absolute or relative path.
 
-Use `sudo pip install` for any modules that requires by `trueMaster.py` or any missing modules.
+Use `sudo pip install` for any modules that are required by `trueMaster.py` or any missing modules.
 
 ### Other Modules
 
@@ -23,12 +23,3 @@ SC2 Reader is a python module that can be used to process a StarCraft 2 replay. 
 ## Requirement
 
 Python 2.7
-
-
-
-
-
-
-
-
-
