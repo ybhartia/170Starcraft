@@ -9,11 +9,6 @@ import random
 import math
 import sys
 
-DIR_SEPARATOR = '/'
-DIR_TEST = "HungsReplayTvZ.SC2Replay"
-# commentOnList = [[18, 'Trentos', 'Probe', 'UnitBornEvent'], [19, 'Onion', 'Probe', 'UnitBornEvent'], [35, 'Trentos', 'Probe', 'UnitBornEvent'], [36, 'Onion', 'Probe', 'UnitBornEvent']]
-
-
 #
 # Comment given events and player predictions
 #
@@ -36,7 +31,7 @@ def comment(commentOnList, p1Predictions, p2Predictions, replay):
                     getScores(p1Predictions[AICommentCount - 1], p2Predictions[AICommentCount - 1]), True, 'm', "ai")
                 AICommentCount += 1
         timeInSec += animate.updateTime(getTime(timeInSec*1.4))
-        timeInSec += animate.commentate(getTime(event[0]) + "  " + commentLine, True, 'm', "basic")
+        timeInSec += animate.commentate(getTime(event[0]) + " - " + commentLine, True, 'm', "basic")
     animate.commentate(helper.getClosing(), True, 'm', "closing")
 
 def getScores(p1Score, p2Score):
@@ -73,39 +68,6 @@ def getLine(event, replay):
         return helper.getUpgradeCompleteLine(player,unit, "", event)
     else:
         return player + ' ' + unit + ' ' + event[3]
-
-
-
-# #
-# # going through the replay directory and train through replays
-# #
-# def trainSVM():
-
-#     # initialize the variables
-#     xTrainData =[[]]
-#     yTrainData = []
-
-#     # going through the directory
-#     for filename in listdir(DIR_NAME):
-
-
-#         # Setting right path to filename
-#         filename = DIR_NAME + DIR_SEPARATOR + filename
-
-#         # Not training with the test replay
-#         if(filename != TEST_REPLAY) and filename[len(DIR_NAME) + len(DIR_SEPARATOR)] != '.':
-
-#             hotVectorData = parser.getTrainHotVectorData(filename)
-#             print filename
-#             xTempTrainData, yTempTrainData = svmHandler.callTrainSVM(hotVectorData)
-
-#             for temp in xTempTrainData:
-#                 xTrainData.append(temp)
-#             yTrainData += yTempTrainData
-
-
-#     svmHandler.callTrainReplays(xTrainData[1:], yTrainData)
-
 
 #
 # going through the replay directory and train through replays
@@ -162,26 +124,6 @@ def runProject(testFile):
     commentOnList = parser.mergeComments(commentOnList)
     comment(commentOnList, yOut1, yOut2, testFile)
 
-
-
-
-DIR_NAME = "workingReplays"
-# TEST_REPLAY = "workingReplays/OneSideDominates.SC2Replay"
-# TEST_REPLAY_TWO = "workingReplays/ggtracker_93731.SC2Replay"
-
-directoryName = "workingReplays"
-
-
-# testFile = trainSVM(directoryName)
-testFile = "TerranDoAll.SC2Replay"
-
-## runProject(DIR_NAME + DIR_SEPARATOR + testFile)
-
-# TestSVM(DIR_NAME + DIR_SEPARATOR + testFile)
-# print(testFile)
-# runProject()
-
-
 try:
     if(len(sys.argv) > 1):
         runProject(sys.argv[1])
@@ -189,3 +131,41 @@ try:
         print "A replay file needs to be provided."
 except:
     print "File needs to be a replay file (.SC2Replay)."
+
+# UNUSED CODE ##################################################################
+
+# DIR_SEPARATOR = '/'
+# DIR_TEST = "HungsReplayTvZ.SC2Replay"
+# DIR_NAME = "workingReplays"
+# directoryName = "workingReplays"
+## runProject(DIR_NAME + DIR_SEPARATOR + testFile)
+
+# commentOnList = [[18, 'Trentos', 'Probe', 'UnitBornEvent'], [19, 'Onion', 'Probe', 'UnitBornEvent'], [35, 'Trentos', 'Probe', 'UnitBornEvent'], [36, 'Onion', 'Probe', 'UnitBornEvent']]
+# TEST_REPLAY = "workingReplays/OneSideDominates.SC2Replay"
+# TEST_REPLAY_TWO = "workingReplays/ggtracker_93731.SC2Replay"
+# testFile = trainSVM(directoryName)
+# testFile = "TerranDoAll.SC2Replay"
+# TestSVM(DIR_NAME + DIR_SEPARATOR + testFile)
+# print(testFile)
+# runProject()
+
+# #
+# # going through the replay directory and train through replays
+# #
+# def trainSVM():
+#     # initialize the variables
+#     xTrainData =[[]]
+#     yTrainData = []
+#     # going through the directory
+#     for filename in listdir(DIR_NAME):
+#         # Setting right path to filename
+#         filename = DIR_NAME + DIR_SEPARATOR + filename
+#         # Not training with the test replay
+#         if(filename != TEST_REPLAY) and filename[len(DIR_NAME) + len(DIR_SEPARATOR)] != '.':
+#             hotVectorData = parser.getTrainHotVectorData(filename)
+#             print filename
+#             xTempTrainData, yTempTrainData = svmHandler.callTrainSVM(hotVectorData)
+#             for temp in xTempTrainData:
+#                 xTrainData.append(temp)
+#             yTrainData += yTempTrainData
+#     svmHandler.callTrainReplays(xTrainData[1:], yTrainData)
